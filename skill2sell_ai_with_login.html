@@ -1,0 +1,5795 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Skill2Sell AI — AI Co-Pilot for Micro-Entrepreneurs</title>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --purple:#6C4DF6;
+  --navy:#17152B;
+  --lav:#F0EDFF;
+  --green:#22C55E;
+  --orange:#F59E0B;
+  --red:#EF4444;
+  --gray:#F7F7FA;
+  --text:#171717;
+  --muted:#6B7280;
+  --border:#E9E7F2;
+  --white:#fff;
+}
+
+html{scroll-behavior:smooth}
+
+body{
+  font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,
+  "Segoe UI",sans-serif;
+  color:var(--text);
+  background:#fff;
+  line-height:1.6;
+}
+
+button,input,select,textarea{font:inherit}
+button{cursor:pointer;border:0}
+a{text-decoration:none;color:inherit}
+
+.container{
+  width:min(1180px,92%);
+  margin:auto;
+}
+
+.section{padding:90px 0}
+.hidden{display:none!important}
+
+/* ================= NAVBAR ================= */
+
+.navbar{
+  position:sticky;
+  top:0;
+  z-index:1000;
+  background:rgba(255,255,255,.94);
+  backdrop-filter:blur(18px);
+  border-bottom:1px solid #eee;
+}
+
+.nav-inner{
+  height:72px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+
+.logo{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-size:20px;
+  font-weight:800;
+  color:var(--navy);
+}
+
+.logo-icon{
+  width:38px;
+  height:38px;
+  border-radius:12px;
+  display:grid;
+  place-items:center;
+  color:white;
+  background:linear-gradient(135deg,#6C4DF6,#4778FF);
+  box-shadow:0 8px 25px #6c4df633;
+}
+
+.nav-links{
+  display:flex;
+  gap:22px;
+  align-items:center;
+  font-size:13px;
+  font-weight:600;
+  color:#4b4b55;
+}
+
+.nav-links a:hover{color:var(--purple)}
+
+.nav-actions{
+  display:flex;
+  gap:10px;
+  align-items:center;
+}
+
+.btn{
+  padding:11px 17px;
+  border-radius:11px;
+  font-weight:700;
+  transition:.2s;
+}
+
+.btn:hover{transform:translateY(-2px)}
+
+.btn-primary{
+  color:white;
+  background:var(--purple);
+  box-shadow:0 10px 25px #6c4df633;
+}
+
+.btn-secondary{
+  background:white;
+  color:var(--navy);
+  border:1px solid var(--border);
+}
+
+.btn-success{
+  background:var(--green);
+  color:white;
+}
+
+.btn-danger{
+  background:#fee2e2;
+  color:#b91c1c;
+}
+
+.btn-small{
+  padding:8px 12px;
+  font-size:13px;
+}
+
+.menu-btn{
+  display:none;
+  background:white;
+  font-size:25px;
+}
+
+/* ================= HERO ================= */
+
+.hero{
+  padding:95px 0 75px;
+  background:
+    radial-gradient(circle at 80% 20%,#dcd6ff 0,transparent 25%),
+    radial-gradient(circle at 20% 80%,#eef4ff 0,transparent 28%),
+    #fff;
+}
+
+.hero-grid{
+  display:grid;
+  grid-template-columns:1.05fr .95fr;
+  gap:65px;
+  align-items:center;
+}
+
+.badge{
+  display:inline-flex;
+  align-items:center;
+  gap:7px;
+  background:var(--lav);
+  color:var(--purple);
+  padding:8px 13px;
+  border-radius:30px;
+  font-weight:700;
+  font-size:13px;
+  margin-bottom:20px;
+}
+
+.hero h1{
+  font-size:clamp(42px,5.2vw,70px);
+  line-height:1.02;
+  letter-spacing:-3px;
+  color:var(--navy);
+  margin-bottom:22px;
+}
+
+.hero h1 span{
+  background:linear-gradient(90deg,#6C4DF6,#4778FF,#d94ca8);
+  -webkit-background-clip:text;
+  color:transparent;
+}
+
+.hero p{
+  font-size:18px;
+  color:var(--muted);
+  max-width:650px;
+}
+
+.hero-buttons{
+  display:flex;
+  gap:12px;
+  margin:30px 0 18px;
+}
+
+.trust{
+  font-size:13px;
+  color:#777;
+}
+
+/* ================= AI CARD ================= */
+
+.ai-card{
+  background:white;
+  border:1px solid #e8e5f5;
+  border-radius:25px;
+  padding:25px;
+  box-shadow:0 30px 80px #3125781b;
+  animation:float 5s ease-in-out infinite;
+}
+
+@keyframes float{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-8px)}
+}
+
+.ai-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:20px;
+}
+
+.ai-title{font-weight:800}
+.live{font-size:12px;color:var(--green);font-weight:700}
+
+.form-box{
+  background:var(--gray);
+  padding:16px;
+  border-radius:15px;
+  margin-bottom:15px;
+}
+
+.form-label{
+  font-size:12px;
+  color:#777;
+  margin-bottom:5px;
+}
+
+.fake-input{
+  background:white;
+  border:1px solid var(--border);
+  padding:10px 12px;
+  border-radius:9px;
+  font-weight:600;
+}
+
+.ai-result{
+  background:linear-gradient(135deg,#f8f6ff,#fff);
+  border:1px solid #ddd7ff;
+  border-radius:17px;
+  padding:18px;
+}
+
+.ai-result-title{
+  font-weight:800;
+  color:var(--purple);
+  margin-bottom:13px;
+}
+
+.result-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+}
+
+.result-item{
+  background:white;
+  padding:11px;
+  border-radius:11px;
+  border:1px solid #eee;
+}
+
+.result-item small{
+  color:#777;
+  display:block;
+}
+
+.result-item strong{font-size:15px}
+
+/* ================= HEADINGS ================= */
+
+.section-head{
+  text-align:center;
+  max-width:760px;
+  margin:0 auto 45px;
+}
+
+.section-head .eyebrow{
+  color:var(--purple);
+  font-size:13px;
+  font-weight:800;
+  text-transform:uppercase;
+  letter-spacing:1px;
+}
+
+.section-head h2{
+  font-size:clamp(32px,4vw,48px);
+  line-height:1.1;
+  color:var(--navy);
+  margin:9px 0 13px;
+  letter-spacing:-1.5px;
+}
+
+.section-head p{
+  color:var(--muted);
+  font-size:17px;
+}
+
+/* ================= CARDS ================= */
+
+.cards{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:17px;
+}
+
+.card{
+  background:white;
+  border:1px solid var(--border);
+  border-radius:18px;
+  padding:23px;
+  transition:.25s;
+}
+
+.card:hover{
+  transform:translateY(-5px);
+  box-shadow:0 18px 40px #17152b0d;
+}
+
+.icon-box{
+  width:46px;
+  height:46px;
+  display:grid;
+  place-items:center;
+  background:var(--lav);
+  border-radius:13px;
+  font-size:21px;
+  margin-bottom:15px;
+}
+
+.card h3{
+  font-size:17px;
+  margin-bottom:7px;
+}
+
+.card p{
+  font-size:14px;
+  color:var(--muted);
+}
+
+/* ================= PROCESS ================= */
+
+.process{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:15px;
+}
+
+.process-card{
+  position:relative;
+  padding:22px;
+  background:var(--gray);
+  border-radius:17px;
+}
+
+.step{
+  width:33px;
+  height:33px;
+  display:grid;
+  place-items:center;
+  background:var(--purple);
+  color:white;
+  border-radius:50%;
+  font-weight:800;
+  margin-bottom:15px;
+}
+
+/* ================= BUILDER ================= */
+
+.builder-wrap{
+  display:grid;
+  grid-template-columns:390px 1fr;
+  gap:25px;
+  align-items:start;
+}
+
+.panel{
+  background:white;
+  border:1px solid var(--border);
+  border-radius:20px;
+  padding:23px;
+  box-shadow:0 12px 35px #17152b08;
+}
+
+.input-group{
+  margin-bottom:15px;
+}
+
+.input-group label{
+  display:block;
+  font-size:13px;
+  font-weight:700;
+  margin-bottom:7px;
+}
+
+.input-group input,
+.input-group select,
+.input-group textarea{
+  width:100%;
+  padding:12px;
+  border:1px solid var(--border);
+  border-radius:10px;
+  outline:none;
+}
+
+.input-group input:focus,
+.input-group select:focus,
+.input-group textarea:focus{
+  border-color:var(--purple);
+  box-shadow:0 0 0 3px #6c4df611;
+}
+
+.checks{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+}
+
+.check{
+  border:1px solid var(--border);
+  padding:7px 10px;
+  border-radius:9px;
+  font-size:12px;
+}
+
+.blueprint{
+  background:var(--navy);
+  color:white;
+  border-radius:22px;
+  padding:26px;
+}
+
+.blueprint h3{font-size:23px}
+
+.product-mini-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+  margin-top:18px;
+}
+
+.product-mini{
+  background:#27243e;
+  padding:15px;
+  border-radius:14px;
+}
+
+.product-mini .price{
+  font-size:20px;
+  font-weight:800;
+  margin:6px 0;
+}
+
+.score{
+  height:6px;
+  background:#45415d;
+  border-radius:10px;
+  overflow:hidden;
+}
+
+.score span{
+  display:block;
+  height:100%;
+  background:var(--green);
+}
+
+/* ================= AI MATERIAL + LOCATION SUGGESTIONS ================= */
+.material-input-box{margin-top:14px}
+.material-input-box input{width:100%;padding:13px 14px;border:1px solid #ddd;border-radius:12px;font-size:14px;outline:none;background:#fff}
+.material-input-box input:focus{border-color:#18352D;box-shadow:0 0 0 3px rgba(24,53,45,.08)}
+.ai-location-note{background:linear-gradient(135deg,#f7f3ec,#fff);border:1px solid #e5ddd1;border-radius:14px;padding:14px;margin-bottom:14px}
+.ai-location-note strong{display:block;margin-bottom:5px}
+.ai-suggestion{border:1px solid #e7e2da;border-radius:14px;padding:15px;margin:10px 0;background:#fff}
+.ai-suggestion .suggestion-title{font-weight:700;margin-bottom:6px}
+.ai-suggestion .suggestion-meta{font-size:12px;color:#777;margin-bottom:9px}
+.location-pill{display:inline-block;padding:5px 9px;border-radius:999px;background:#eef4f0;color:#18352D;font-size:12px;margin:3px 4px 3px 0}
+
+/* ================= MATERIAL FINDER ================= */
+
+.material-section{
+  background:
+    radial-gradient(circle at 90% 10%,#e5dfff,transparent 30%),
+    #f7f6ff;
+}
+
+.material-layout{
+  display:grid;
+  grid-template-columns:390px 1fr;
+  gap:22px;
+  align-items:start;
+}
+
+.material-selector{
+  background:white;
+  border:1px solid var(--border);
+  border-radius:20px;
+  padding:22px;
+}
+
+.material-list{
+  display:grid;
+  gap:10px;
+  margin-top:15px;
+}
+
+.material-option{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:12px;
+  border:1px solid var(--border);
+  border-radius:12px;
+  cursor:pointer;
+  transition:.2s;
+}
+
+.material-option:hover{
+  border-color:var(--purple);
+  background:#faf9ff;
+}
+
+.material-option input{
+  accent-color:var(--purple);
+}
+
+.material-results{
+  display:grid;
+  gap:15px;
+}
+
+.location-card{
+  background:white;
+  border:1px solid var(--border);
+  border-radius:18px;
+  padding:20px;
+}
+
+.location-card h3{
+  margin-bottom:5px;
+}
+
+.location-card p{
+  color:var(--muted);
+  font-size:14px;
+}
+
+.location-actions{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  margin-top:13px;
+}
+
+.material-tag{
+  display:inline-block;
+  padding:5px 9px;
+  border-radius:20px;
+  background:var(--lav);
+  color:var(--purple);
+  font-size:12px;
+  font-weight:700;
+  margin:3px;
+}
+
+.checklist{
+  background:var(--navy);
+  color:white;
+  border-radius:18px;
+  padding:20px;
+}
+
+.checklist-item{
+  display:flex;
+  gap:10px;
+  align-items:center;
+  padding:10px 0;
+  border-bottom:1px solid #39344f;
+}
+
+.checklist-item:last-child{
+  border-bottom:0;
+}
+
+/* ================= PRODUCTS ================= */
+
+.product-section{
+  background:var(--gray);
+}
+
+.product-toolbar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:20px;
+  gap:10px;
+}
+
+.product-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:18px;
+}
+
+.product-card{
+  background:white;
+  border:1px solid var(--border);
+  border-radius:19px;
+  overflow:hidden;
+  transition:.2s;
+}
+
+.product-card:hover{
+  transform:translateY(-4px);
+  box-shadow:0 18px 35px #17152b10;
+}
+
+.product-image{
+  height:185px;
+  background:linear-gradient(135deg,#ece8ff,#dceaff);
+  display:grid;
+  place-items:center;
+  font-size:60px;
+  overflow:hidden;
+}
+
+.product-image img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.product-body{
+  padding:18px;
+}
+
+.product-body h3{
+  margin-bottom:5px;
+}
+
+.product-meta{
+  display:flex;
+  justify-content:space-between;
+  color:#777;
+  font-size:12px;
+  margin:7px 0;
+}
+
+.profit{
+  color:var(--green);
+  font-weight:800;
+}
+
+.product-buttons{
+  display:flex;
+  gap:7px;
+  flex-wrap:wrap;
+  margin-top:14px;
+}
+
+/* ================= SALES ================= */
+
+.sales-section{
+  background:#fff;
+}
+
+.sales-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:14px;
+  margin-bottom:20px;
+}
+
+.sales-stat{
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:18px;
+  background:white;
+}
+
+.sales-stat small{
+  color:#777;
+}
+
+.sales-stat strong{
+  display:block;
+  font-size:27px;
+  margin-top:4px;
+  color:var(--navy);
+}
+
+.sales-stat .green{
+  color:var(--green);
+}
+
+.sales-rate{
+  margin-top:8px;
+  height:8px;
+  border-radius:20px;
+  background:#eee;
+  overflow:hidden;
+}
+
+.sales-rate span{
+  display:block;
+  height:100%;
+  background:linear-gradient(90deg,#6C4DF6,#22C55E);
+}
+
+.sales-table{
+  width:100%;
+  border-collapse:collapse;
+  font-size:13px;
+}
+
+.sales-table th,
+.sales-table td{
+  padding:12px;
+  border-bottom:1px solid #eee;
+  text-align:left;
+}
+
+/* ================= FEEDBACK ================= */
+
+.feedback-dashboard{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:20px;
+}
+
+.sentiment{
+  display:flex;
+  gap:10px;
+  margin:15px 0;
+}
+
+.sent-card{
+  flex:1;
+  background:var(--gray);
+  border-radius:12px;
+  padding:15px;
+  text-align:center;
+}
+
+.sent-card strong{
+  font-size:24px;
+  display:block;
+}
+
+.progress-row{
+  margin:13px 0;
+}
+
+.progress-label{
+  display:flex;
+  justify-content:space-between;
+  font-size:13px;
+  margin-bottom:5px;
+}
+
+.progress{
+  height:8px;
+  background:#eee;
+  border-radius:20px;
+  overflow:hidden;
+}
+
+.progress span{
+  display:block;
+  height:100%;
+  background:var(--purple);
+}
+
+/* ================= PIVOT ================= */
+
+.pivot-section{
+  background:var(--navy);
+  color:white;
+}
+
+.pivot-section .section-head h2{
+  color:white;
+}
+
+.pivot-section .section-head p{
+  color:#b9b6c8;
+}
+
+.pivot-layout{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:30px;
+  align-items:center;
+}
+
+.loop{
+  width:370px;
+  height:370px;
+  max-width:100%;
+  margin:auto;
+  border-radius:50%;
+  border:2px dashed #6c4df6;
+  display:grid;
+  place-items:center;
+  position:relative;
+  animation:spin 25s linear infinite;
+}
+
+@keyframes spin{
+  to{transform:rotate(360deg)}
+}
+
+.loop-center{
+  width:145px;
+  height:145px;
+  border-radius:50%;
+  background:linear-gradient(135deg,#6c4df6,#4778ff);
+  display:grid;
+  place-items:center;
+  text-align:center;
+  font-weight:800;
+  padding:20px;
+  animation:spinReverse 25s linear infinite;
+}
+
+@keyframes spinReverse{
+  to{transform:rotate(-360deg)}
+}
+
+.loop-item{
+  position:absolute;
+  background:#29253e;
+  padding:8px 12px;
+  border-radius:20px;
+  font-size:12px;
+  font-weight:700;
+}
+
+.loop-item:nth-child(1){top:-10px}
+.loop-item:nth-child(2){right:-20px;top:65px}
+.loop-item:nth-child(3){right:-20px;bottom:65px}
+.loop-item:nth-child(4){bottom:-10px}
+.loop-item:nth-child(5){left:-20px;bottom:65px}
+.loop-item:nth-child(6){left:-20px;top:65px}
+
+.feedback-box{
+  background:#242139;
+  border:1px solid #373250;
+  border-radius:20px;
+  padding:24px;
+}
+
+.quote{
+  background:#302b49;
+  padding:17px;
+  border-radius:13px;
+  font-size:18px;
+  margin:15px 0;
+}
+
+.insight{
+  background:#17152b;
+  padding:15px;
+  border-radius:13px;
+  margin:10px 0;
+}
+
+.recommendation{
+  background:white;
+  color:var(--text);
+  border-radius:13px;
+  padding:14px;
+  margin-top:10px;
+}
+
+.rec-actions{
+  display:flex;
+  gap:7px;
+  margin-top:10px;
+}
+
+/* ================= CHAT ================= */
+
+.chat{
+  max-width:760px;
+  margin:auto;
+  background:#f5f3fb;
+  border-radius:24px;
+  padding:20px;
+}
+
+.chat-head{
+  background:white;
+  padding:15px;
+  border-radius:15px;
+  display:flex;
+  gap:12px;
+  align-items:center;
+  margin-bottom:15px;
+}
+
+.avatar{
+  width:40px;
+  height:40px;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  background:var(--purple);
+  color:white;
+  font-weight:800;
+}
+
+.message{
+  max-width:78%;
+  padding:12px 14px;
+  border-radius:15px;
+  margin:10px 0;
+  font-size:14px;
+}
+
+.customer{
+  background:white;
+  border:1px solid #e8e6ed;
+}
+
+.ai{
+  background:#e9e3ff;
+  margin-left:auto;
+}
+
+.chat-actions{
+  display:flex;
+  gap:7px;
+  flex-wrap:wrap;
+  margin-top:18px;
+}
+
+/* ================= CONTENT ================= */
+
+.tabs{
+  display:flex;
+  gap:8px;
+  overflow:auto;
+  margin-bottom:15px;
+}
+
+.tab{
+  padding:9px 13px;
+  border-radius:10px;
+  background:var(--gray);
+  white-space:nowrap;
+  font-size:13px;
+  font-weight:700;
+}
+
+.tab.active{
+  background:var(--purple);
+  color:white;
+}
+
+.content-output{
+  background:var(--gray);
+  border-radius:16px;
+  padding:22px;
+  min-height:150px;
+  color:#333;
+  white-space:pre-line;
+}
+
+.content-actions{
+  display:flex;
+  gap:8px;
+  margin-top:13px;
+  flex-wrap:wrap;
+}
+
+/* ================= DASHBOARD ================= */
+
+.dashboard{
+  display:grid;
+  grid-template-columns:220px 1fr;
+  border:1px solid var(--border);
+  border-radius:22px;
+  overflow:hidden;
+  min-height:500px;
+  background:white;
+}
+
+.sidebar{
+  background:var(--navy);
+  color:white;
+  padding:18px;
+}
+
+.sidebar h3{
+  margin-bottom:20px;
+}
+
+.side-link{
+  padding:10px 11px;
+  border-radius:9px;
+  font-size:13px;
+  margin:4px 0;
+  color:#bcb9c9;
+  cursor:pointer;
+}
+
+.side-link:hover,
+.side-link.active{
+  background:#302b4b;
+  color:white;
+}
+
+.dash-main{
+  padding:25px;
+}
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:12px;
+  margin:18px 0;
+}
+
+.stat{
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:15px;
+}
+
+.stat small{color:#777}
+
+.stat strong{
+  font-size:23px;
+  display:block;
+  margin-top:4px;
+}
+
+.chart{
+  height:190px;
+  display:flex;
+  align-items:end;
+  gap:12px;
+  padding:15px;
+  background:var(--gray);
+  border-radius:15px;
+}
+
+.bar{
+  flex:1;
+  background:linear-gradient(to top,#6c4df6,#8c78ff);
+  border-radius:7px 7px 0 0;
+  min-height:20px;
+}
+
+/* ================= MODAL ================= */
+
+.modal{
+  position:fixed;
+  inset:0;
+  background:#17152b99;
+  z-index:2000;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+}
+
+.modal.show{
+  display:flex;
+}
+
+.modal-box{
+  background:white;
+  width:min(680px,100%);
+  max-height:90vh;
+  overflow:auto;
+  border-radius:22px;
+  padding:25px;
+}
+
+.modal-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:20px;
+}
+
+.close{
+  width:35px;
+  height:35px;
+  border-radius:50%;
+  background:var(--gray);
+  font-size:20px;
+}
+
+/* ================= FOOTER ================= */
+
+footer{
+  background:var(--navy);
+  color:white;
+  padding:60px 0 25px;
+}
+
+.footer-grid{
+  display:grid;
+  grid-template-columns:2fr 1fr 1fr 1fr;
+  gap:35px;
+}
+
+footer h3{
+  margin-bottom:13px;
+}
+
+footer p,
+footer a{
+  color:#aaa;
+  font-size:14px;
+  display:block;
+  margin:6px 0;
+}
+
+.footer-bottom{
+  border-top:1px solid #312e45;
+  margin-top:35px;
+  padding-top:20px;
+  color:#888;
+  font-size:13px;
+}
+
+/* ================= TOAST ================= */
+
+.toast{
+  position:fixed;
+  right:20px;
+  bottom:20px;
+  background:var(--navy);
+  color:white;
+  padding:14px 18px;
+  border-radius:12px;
+  z-index:3000;
+  box-shadow:0 15px 35px #0003;
+  transform:translateY(100px);
+  opacity:0;
+  transition:.3s;
+}
+
+.toast.show{
+  transform:translateY(0);
+  opacity:1;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media(max-width:1000px){
+
+  .nav-links{display:none}
+  .menu-btn{display:block}
+
+  .hero-grid,
+  .builder-wrap,
+  .pivot-layout,
+  .material-layout{
+    grid-template-columns:1fr;
+  }
+
+  .cards{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .process{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .product-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .sales-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .footer-grid{
+    grid-template-columns:1fr 1fr;
+  }
+}
+
+@media(max-width:700px){
+
+  .section{padding:65px 0}
+  .hero{padding:65px 0}
+
+  .hero h1{
+    letter-spacing:-2px;
+  }
+
+  .hero-buttons{
+    flex-direction:column;
+  }
+
+  .hero-buttons .btn{
+    text-align:center;
+  }
+
+  .cards,
+  .product-grid,
+  .feedback-dashboard,
+  .stats,
+  .sales-grid{
+    grid-template-columns:1fr;
+  }
+
+  .process{
+    grid-template-columns:1fr;
+  }
+
+  .product-mini-grid{
+    grid-template-columns:1fr;
+  }
+
+  .dashboard{
+    grid-template-columns:1fr;
+  }
+
+  .sidebar{
+    display:none;
+  }
+
+  .footer-grid{
+    grid-template-columns:1fr;
+  }
+
+  .nav-actions .btn-secondary{
+    display:none;
+  }
+
+  .result-grid{
+    grid-template-columns:1fr;
+  }
+
+  .loop{
+    width:300px;
+    height:300px;
+  }
+
+  .loop-center{
+    width:120px;
+    height:120px;
+    font-size:12px;
+  }
+
+  .loop-item{
+    font-size:10px;
+  }
+}
+
+/* ================= LOGIN / SIGNUP ================= */
+.auth-box{width:min(440px,100%);padding:28px}
+.auth-brand{display:flex;align-items:center;gap:10px;margin-bottom:8px;color:var(--navy);font-weight:800;font-size:22px}
+.auth-subtitle{color:var(--muted);font-size:14px;margin-bottom:22px}
+.auth-tabs{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:20px;background:var(--gray);padding:5px;border-radius:12px}
+.auth-tab{padding:10px;border-radius:9px;background:transparent;font-weight:700;color:var(--muted)}
+.auth-tab.active{background:#fff;color:var(--purple);box-shadow:0 2px 8px #0000000c}
+.auth-error{color:#b91c1c;background:#fee2e2;border-radius:9px;padding:10px;font-size:13px;margin:10px 0;display:none}
+.auth-note{font-size:12px;color:#777;margin-top:14px;line-height:1.5}
+.auth-user{font-size:12px;color:var(--purple);font-weight:700;max-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+
+</style>
+</head>
+
+<body>
+
+<!-- =========================================================
+     NAVBAR
+========================================================= -->
+
+<header class="navbar">
+
+<div class="container nav-inner">
+
+<a href="#home" class="logo">
+<span class="logo-icon">✦</span>
+Skill2Sell AI
+</a>
+
+<nav class="nav-links">
+<a href="#home">Home</a>
+<a href="#builder">AI Builder</a>
+<a href="#materials">Find Materials</a>
+<a href="#products">My Products</a>
+<a href="#sales">Sales</a>
+<a href="#salesAssistant">Sales Assistant</a>
+<a href="#pivot">Pivot & Grow</a>
+<a href="#dashboard">Dashboard</a>
+</nav>
+
+<div class="nav-actions">
+
+<button class="btn btn-secondary"
+id="loginNavButton" onclick="openLogin()">
+Login
+</button>
+
+<button class="btn btn-primary"
+onclick="scrollToId('builder')">
+Start Building
+</button>
+
+<button class="menu-btn" onclick="toggleMenu()">☰</button>
+
+</div>
+
+</div>
+</header>
+
+
+<!-- =========================================================
+     HERO
+========================================================= -->
+
+<section class="hero" id="home">
+
+<div class="container hero-grid">
+
+<div>
+
+<div class="badge">
+✦ AI Co-Pilot for Micro-Entrepreneurs
+</div>
+
+<h1>
+Turn Your Skill Into a
+<span>Business With AI.</span>
+</h1>
+
+<p>
+Tell us what you know, your budget, and what you want to sell.
+Skill2Sell AI helps you build products, find materials,
+price them, sell socially, learn from customers and improve.
+</p>
+
+<div class="hero-buttons">
+
+<button class="btn btn-primary"
+onclick="scrollToId('builder')">
+Start My Business →
+</button>
+
+<button class="btn btn-secondary"
+onclick="runDemo()">
+▶ Try Live Demo
+</button>
+
+</div>
+
+<div class="trust">
+No website required • No business experience required •
+Start with your existing skills
+</div>
+
+</div>
+
+
+<div class="ai-card">
+
+<div class="ai-header">
+
+<div class="ai-title">
+✨ AI Business Builder
+</div>
+
+<div class="live">
+● AI Ready
+</div>
+
+</div>
+
+
+<div class="form-box">
+
+<div class="form-label">
+YOUR SKILL
+</div>
+
+<div class="fake-input">
+🎨 Fabric Painting
+</div>
+
+</div>
+
+
+<div class="form-box">
+
+<div class="form-label">
+YOUR BUDGET
+</div>
+
+<div class="fake-input">
+₹2,000
+</div>
+
+</div>
+
+
+<div class="form-box">
+
+<div class="form-label">
+SELLING GOAL
+</div>
+
+<div class="fake-input">
+Instagram
+</div>
+
+</div>
+
+
+<button
+class="btn btn-primary"
+style="width:100%"
+onclick="generateHero()">
+
+✨ Generate My Business
+
+</button>
+
+
+<div class="ai-result"
+id="heroResult"
+style="margin-top:15px">
+
+<div class="ai-result-title">
+✨ AI Business Plan Generated
+</div>
+
+<div class="result-grid">
+
+<div class="result-item">
+<small>Product</small>
+<strong>Custom Tote Bag</strong>
+</div>
+
+<div class="result-item">
+<small>Selling Price</small>
+<strong>₹399</strong>
+</div>
+
+<div class="result-item">
+<small>Estimated Cost</small>
+<strong>₹180</strong>
+</div>
+
+<div class="result-item">
+<small>Estimated Profit</small>
+<strong style="color:#22C55E">₹219</strong>
+</div>
+
+</div>
+</div>
+
+</div>
+</div>
+</section>
+
+
+<!-- =========================================================
+     PROBLEM
+========================================================= -->
+
+<section class="section">
+
+<div class="container">
+
+<div class="section-head">
+
+<div class="eyebrow">
+The Problem
+</div>
+
+<h2>
+You Have the Skill. But Where Do You Start?
+</h2>
+
+<p>
+Skill2Sell AI removes the confusing steps between having
+a skill and building a small business.
+</p>
+
+</div>
+
+
+<div class="cards">
+
+<div class="card">
+<div class="icon-box">💡</div>
+<h3>I Don't Know What to Sell</h3>
+<p>
+AI identifies practical products and services
+that match your skills and resources.
+</p>
+</div>
+
+<div class="card">
+<div class="icon-box">₹</div>
+<h3>I Don't Know How to Price</h3>
+<p>
+Estimate production costs, pricing, margins and potential profit.
+</p>
+</div>
+
+<div class="card">
+<div class="icon-box">📍</div>
+<h3>I Don't Know Where to Get Materials</h3>
+<p>
+AI helps identify what materials you need
+and guides you toward nearby sourcing locations.
+</p>
+</div>
+
+<div class="card">
+<div class="icon-box">📱</div>
+<h3>I Don't Know How to Find Customers</h3>
+<p>
+Create social content, sales messages and customer responses.
+</p>
+</div>
+
+</div>
+
+<div style="text-align:center;margin-top:35px;font-weight:800;color:var(--purple)">
+Skill → Materials → Product → Customer → Feedback → Growth
+</div>
+
+</div>
+</section>
+
+
+<!-- =========================================================
+     BUILDER
+========================================================= -->
+
+<section class="section" id="builder">
+
+<div class="container">
+
+<div class="section-head">
+
+<div class="eyebrow">
+AI Business Builder
+</div>
+
+<h2>
+From Skill to Business Plan in Seconds
+</h2>
+
+<p>
+Start with what you already know. AI helps you figure out
+what to make, what you need and what to sell.
+</p>
+
+</div>
+
+
+<div class="builder-wrap">
+
+<div class="panel">
+
+<div class="input-group">
+
+<label>
+What is your skill?
+</label>
+
+<input
+id="skillInput"
+value="Fabric Painting"
+placeholder="Example: baking, photography..."
+>
+
+</div>
+
+
+<div class="input-group">
+
+<label>
+What is your budget?
+</label>
+
+<input
+id="budgetInput"
+value="2000"
+type="number"
+>
+
+</div>
+
+
+<div class="input-group">
+
+<label>
+What do you want to sell?
+</label>
+
+<select id="sellType">
+
+<option>Physical Products</option>
+<option>Digital Products</option>
+<option>Services</option>
+<option>Not Sure</option>
+
+</select>
+
+</div>
+<button
+class="btn btn-primary"
+style="width:100%"
+onclick="generateBusiness()">
+
+✨ Generate Business Plan
+
+</button>
+
+</div>
+
+
+<div class="blueprint" id="blueprint">
+
+<div
+class="badge"
+style="background:#302a4d;color:#bcaeff">
+
+AI Generated
+
+</div>
+
+<h3>
+Your AI Business Blueprint
+</h3>
+
+<p style="color:#bcb9c9;margin-top:5px">
+Based on Fabric Painting + ₹2,000
+</p>
+
+
+<div class="product-mini-grid">
+
+<div class="product-mini">
+
+<small>Product</small>
+
+<strong>
+Custom Tote Bag
+</strong>
+
+<div class="price">
+₹399
+</div>
+
+<small>
+Profit: ₹219
+</small>
+
+<div class="score">
+<span style="width:87%"></span>
+</div>
+
+<small>
+Demand 87%
+</small>
+
+</div>
+
+
+<div class="product-mini">
+
+<small>Product</small>
+
+<strong>
+Mini Pouch
+</strong>
+
+<div class="price">
+₹249
+</div>
+
+<small>
+Profit: ₹129
+</small>
+
+<div class="score">
+<span style="width:76%"></span>
+</div>
+
+<small>
+Demand 76%
+</small>
+
+</div>
+
+
+<div class="product-mini">
+
+<small>Product</small>
+
+<strong>
+Gift Bundle
+</strong>
+
+<div class="price">
+₹599
+</div>
+
+<small>
+Profit: ₹299
+</small>
+
+<div class="score">
+<span style="width:82%"></span>
+</div>
+
+<small>
+Demand 82%
+</small>
+
+</div>
+
+</div>
+
+
+<div style="margin-top:22px">
+
+<strong>
+Recommended Materials
+</strong>
+
+<p style="color:#bcb9c9">
+
+Canvas tote bags • Fabric paints • Brushes •
+Palette • Packaging bags • Thank-you cards
+
+</p>
+
+<button
+class="btn btn-primary btn-small"
+style="margin-top:10px"
+onclick="scrollToId('materials')">
+
+📍 Find These Materials
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+</section>
+
+
+<!-- =========================================================
+     MATERIAL FINDER
+========================================================= -->
+
+<section class="section material-section" id="materials">
+
+<div class="container">
+
+<div class="section-head">
+
+<div class="eyebrow">
+Material Finder
+</div>
+
+<h2>
+Find Where to Collect Your Materials
+</h2>
+
+<p>
+Choose the materials you need. Skill2Sell AI guides you toward
+nearby shops, markets and supplier categories.
+</p>
+
+</div>
+
+
+<div class="material-layout">
+
+
+<!-- MATERIAL SELECTOR -->
+
+<div class="material-selector">
+
+<h3>
+🧰 What Do You Need?
+</h3>
+
+<p style="color:#777;font-size:13px;margin-top:5px">
+Select everything you need for your product.
+</p>
+
+<div class="material-input-box">
+  <label style="display:block;font-size:13px;font-weight:700;margin-bottom:7px">
+    Enter your material
+  </label>
+  <input id="customMaterialInput" type="text" placeholder="Example: canvas cloth, beads, acrylic paint..." autocomplete="off">
+  <small style="display:block;color:#888;margin-top:6px">
+    AI will suggest where to source it and what type of supplier to look for.
+  </small>
+</div>
+
+<div class="material-input-box">
+  <label style="display:block;font-size:13px;font-weight:700;margin-bottom:7px">
+    Your area (optional)
+  </label>
+  <input id="manualLocationInput" type="text" placeholder="Example: Dilsukhnagar, Hyderabad">
+  <small style="display:block;color:#888;margin-top:6px">
+    Leave blank and use “Use My Current Location” to let your browser find your area.
+  </small>
+</div>
+
+
+<div class="material-list">
+
+<label class="material-option">
+<input
+type="checkbox"
+value="fabric"
+data-name="Fabric / Cloth"
+data-search="fabric shops"
+>
+🧵 Fabric / Cloth
+</label>
+
+
+<label class="material-option">
+<input
+type="checkbox"
+value="paint"
+data-name="Fabric Paint"
+data-search="art supply stores"
+>
+🎨 Fabric Paint
+</label>
+
+
+<label class="material-option">
+<input
+type="checkbox"
+value="brushes"
+data-name="Paint Brushes"
+data-search="art supply stores"
+>
+🖌️ Paint Brushes
+</label>
+
+
+<label class="material-option">
+<input
+type="checkbox"
+value="packaging"
+data-name="Packaging Materials"
+data-search="packaging material shops"
+>
+📦 Packaging
+</label>
+
+
+<label class="material-option">
+<input
+type="checkbox"
+value="beads"
+data-name="Beads / Accessories"
+data-search="craft stores"
+>
+📿 Beads / Accessories
+</label>
+
+
+<label class="material-option">
+<input
+type="checkbox"
+value="stationery"
+data-name="Stationery"
+data-search="stationery shops"
+>
+📚 Stationery
+</label>
+
+
+<label class="material-option">
+<input
+type="checkbox"
+value="food"
+data-name="Food Ingredients"
+data-search="wholesale grocery stores"
+>
+🍰 Food Ingredients
+</label>
+
+
+<label class="material-option">
+<input
+type="checkbox"
+value="printing"
+data-name="Printing"
+data-search="printing shops"
+>
+🖨️ Printing
+</label>
+
+
+<label class="material-option">
+<input
+type="checkbox"
+value="digital"
+data-name="Digital / Electronics"
+data-search="electronics stores"
+>
+💻 Electronics
+</label>
+
+</div>
+
+
+<div style="margin-top:18px">
+
+<button
+class="btn btn-primary"
+style="width:100%"
+onclick="findMaterials()">
+
+📍 Find Nearby Sources
+
+</button>
+
+</div>
+
+
+<div style="margin-top:10px">
+
+<button
+class="btn btn-secondary"
+style="width:100%"
+onclick="useCurrentLocation()">
+
+📌 Use My Current Location
+
+</button>
+
+</div>
+
+
+</div>
+
+
+<!-- RESULTS -->
+
+<div class="material-results">
+
+<div class="location-card">
+
+<h3>
+📍 Material Sourcing Assistant
+</h3>
+
+<p id="locationStatus">
+Select materials on the left and click
+"Find Nearby Sources".
+</p>
+
+<div
+id="materialResults"
+style="margin-top:15px">
+
+<div style="
+background:var(--gray);
+padding:18px;
+border-radius:14px;
+color:#777;
+">
+
+Your sourcing recommendations will appear here.
+
+</div>
+
+</div>
+
+</div>
+
+
+<div class="checklist">
+
+<h3>
+✓ Your Material Checklist
+</h3>
+
+<p style="color:#bbb;font-size:13px;margin-top:5px">
+
+Tick items as you collect them.
+
+</p>
+
+<div id="materialChecklist">
+
+<div style="
+color:#aaa;
+padding:15px 0;
+">
+
+No materials selected yet.
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+</section>
+
+
+<!-- =========================================================
+     PRODUCTS
+========================================================= -->
+
+<section class="section product-section" id="products">
+
+<div class="container">
+
+<div class="section-head">
+
+<div class="eyebrow">
+Seller Workspace
+</div>
+
+<h2>
+My Products
+</h2>
+
+<p>
+Upload product images, manage listings, record sales
+and let AI help you improve what you sell.
+</p>
+
+</div>
+
+
+<div class="product-toolbar">
+
+<div>
+
+<strong id="productCount">
+3 Products
+</strong>
+
+<span style="color:#777;font-size:13px">
+• Seller Product Catalog
+</span>
+
+</div>
+
+
+<button
+class="btn btn-primary"
+onclick="openAddProduct()">
+
++ Add Product
+
+</button>
+
+</div>
+
+
+<div class="product-grid" id="productGrid">
+
+<!-- PRODUCT 1 -->
+
+<div class="product-card"
+data-product="tote">
+
+<div class="product-image"
+id="img-tote">
+
+🎨
+
+</div>
+
+
+<div class="product-body">
+
+<h3>
+Custom Hand-Painted Tote Bag
+</h3>
+
+<p style="font-size:13px;color:#777">
+
+Personalized hand-painted canvas tote.
+
+</p>
+
+
+<div class="product-meta">
+<span>Price</span>
+<strong>₹599</strong>
+</div>
+
+
+<div class="product-meta">
+<span>Cost</span>
+<strong>₹280</strong>
+</div>
+
+
+<div class="product-meta">
+<span>Stock</span>
+<strong>12</strong>
+</div>
+
+
+<div class="product-meta">
+<span>Sales Today</span>
+<strong id="today-tote">0</strong>
+</div>
+
+
+<div class="product-meta">
+<span>Sales This Week</span>
+<strong id="week-tote">0</strong>
+</div>
+
+
+<div class="product-meta">
+<span>Estimated Profit</span>
+<span class="profit">
+₹319
+</span>
+</div>
+
+
+<div class="product-buttons">
+
+<button
+class="btn btn-secondary btn-small"
+onclick="viewFeedback('tote')">
+
+View Feedback
+
+</button>
+
+
+<button
+class="btn btn-success btn-small"
+onclick="openSaleModal('tote')">
+
++ Sale
+
+</button>
+
+
+<button
+class="btn btn-primary btn-small"
+onclick="editProduct('tote')">
+
+Edit
+
+</button>
+
+
+<button
+class="btn btn-small"
+style="background:#F0EDFF;color:#6C4DF6"
+onclick="openPivot('tote')">
+
+✨ AI Improve
+
+</button>
+
+</div>
+
+</div>
+</div>
+
+
+<!-- PRODUCT 2 -->
+
+<div class="product-card"
+data-product="pouch">
+
+<div class="product-image">
+👜
+</div>
+
+<div class="product-body">
+
+<h3>
+Mini Painted Pouch
+</h3>
+
+<p style="font-size:13px;color:#777">
+Small personalized fabric pouch.
+</p>
+
+<div class="product-meta">
+<span>Price</span>
+<strong>₹249</strong>
+</div>
+
+<div class="product-meta">
+<span>Cost</span>
+<strong>₹120</strong>
+</div>
+
+<div class="product-meta">
+<span>Stock</span>
+<strong>18</strong>
+</div>
+
+<div class="product-meta">
+<span>Sales Today</span>
+<strong id="today-pouch">0</strong>
+</div>
+
+<div class="product-meta">
+<span>Sales This Week</span>
+<strong id="week-pouch">0</strong>
+</div>
+
+<div class="product-meta">
+<span>Estimated Profit</span>
+<span class="profit">
+₹129
+</span>
+</div>
+
+<div class="product-buttons">
+
+<button
+class="btn btn-secondary btn-small"
+onclick="viewFeedback('pouch')">
+View Feedback
+</button>
+
+<button
+class="btn btn-success btn-small"
+onclick="openSaleModal('pouch')">
++ Sale
+</button>
+
+<button
+class="btn btn-primary btn-small"
+onclick="editProduct('pouch')">
+Edit
+</button>
+
+<button
+class="btn btn-small"
+style="background:#F0EDFF;color:#6C4DF6"
+onclick="openPivot('pouch')">
+✨ AI Improve
+</button>
+
+</div>
+
+</div>
+</div>
+
+
+<!-- PRODUCT 3 -->
+
+<div class="product-card"
+data-product="bundle">
+
+<div class="product-image">
+🎁
+</div>
+
+<div class="product-body">
+
+<h3>
+Personalized Gift Bundle
+</h3>
+
+<p style="font-size:13px;color:#777">
+Tote + pouch + personalized note.
+</p>
+
+<div class="product-meta">
+<span>Price</span>
+<strong>₹699</strong>
+</div>
+
+<div class="product-meta">
+<span>Cost</span>
+<strong>₹400</strong>
+</div>
+
+<div class="product-meta">
+<span>Stock</span>
+<strong>7</strong>
+</div>
+
+<div class="product-meta">
+<span>Sales Today</span>
+<strong id="today-bundle">0</strong>
+</div>
+
+<div class="product-meta">
+<span>Sales This Week</span>
+<strong id="week-bundle">0</strong>
+</div>
+
+<div class="product-meta">
+<span>Estimated Profit</span>
+<span class="profit">
+₹299
+</span>
+</div>
+
+<div class="product-buttons">
+
+<button
+class="btn btn-secondary btn-small"
+onclick="viewFeedback('bundle')">
+View Feedback
+</button>
+
+<button
+class="btn btn-success btn-small"
+onclick="openSaleModal('bundle')">
++ Sale
+</button>
+
+<button
+class="btn btn-primary btn-small"
+onclick="editProduct('bundle')">
+Edit
+</button>
+
+<button
+class="btn btn-small"
+style="background:#F0EDFF;color:#6C4DF6"
+onclick="openPivot('bundle')">
+✨ AI Improve
+</button>
+
+</div>
+
+</div>
+</div>
+
+</div>
+
+</div>
+</section>
+
+
+<!-- =========================================================
+     SALES ANALYTICS
+========================================================= -->
+
+<section class="section sales-section" id="sales">
+
+<div class="container">
+
+<div class="section-head">
+
+<div class="eyebrow">
+Sales Intelligence
+</div>
+
+<h2>
+How Fast Are You Selling?
+</h2>
+
+<p>
+Track today's sales, this week's sales and your current
+sales rate automatically.
+</p>
+
+</div>
+
+
+<div class="sales-grid">
+
+<div class="sales-stat">
+
+<small>
+Today's Units
+</small>
+
+<strong id="todayUnits">
+0
+</strong>
+
+</div>
+
+
+<div class="sales-stat">
+
+<small>
+Today's Revenue
+</small>
+
+<strong id="todayRevenue">
+₹0
+</strong>
+
+</div>
+
+
+<div class="sales-stat">
+
+<small>
+This Week's Units
+</small>
+
+<strong id="weekUnits">
+0
+</strong>
+
+</div>
+
+
+<div class="sales-stat">
+
+<small>
+This Week's Revenue
+</small>
+
+<strong id="weekRevenue">
+₹0
+</strong>
+
+</div>
+
+</div>
+
+
+<div class="panel">
+
+<div style="
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:10px;
+flex-wrap:wrap;
+">
+
+<div>
+
+<h3>
+Weekly Selling Rate
+</h3>
+
+<p style="color:#777;font-size:13px">
+Percentage of your available stock sold this week.
+</p>
+
+</div>
+
+<strong
+id="weeklyRateText"
+style="font-size:24px;color:var(--purple)">
+0%
+</strong>
+
+</div>
+
+
+<div class="sales-rate">
+
+<span
+id="weeklyRateBar"
+style="width:0%">
+</span>
+
+</div>
+
+
+<div
+style="
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:12px;
+margin-top:20px;
+">
+
+<div class="stat">
+
+<small>
+Average Sales / Day
+</small>
+
+<strong id="avgDailySales">
+0
+</strong>
+
+</div>
+
+
+<div class="stat">
+
+<small>
+Best Selling Product
+</small>
+
+<strong id="bestProduct">
+—
+</strong>
+
+</div>
+
+
+<div class="stat">
+
+<small>
+Projected Weekly Units
+</small>
+
+<strong id="projectedSales">
+0
+</strong>
+
+</div>
+
+</div>
+
+</div>
+
+
+<div class="panel" style="margin-top:18px">
+
+<h3>
+Recent Sales
+</h3>
+
+<div style="overflow:auto;margin-top:12px">
+
+<table class="sales-table">
+
+<thead>
+
+<tr>
+
+<th>Date</th>
+<th>Product</th>
+<th>Quantity</th>
+<th>Revenue</th>
+
+</tr>
+
+</thead>
+
+<tbody id="salesTableBody">
+
+<tr>
+<td colspan="4" style="color:#777">
+No sales recorded yet.
+</td>
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</div>
+</section>
+
+
+<!-- =========================================================
+     CUSTOMER FEEDBACK
+========================================================= -->
+
+<section class="section" id="feedback">
+
+<div class="container">
+
+<div class="section-head">
+
+<div class="eyebrow">
+Customer Intelligence
+</div>
+
+<h2>
+See What Your Customers Are Saying
+</h2>
+
+<p>
+Every review becomes useful business intelligence.
+</p>
+
+</div>
+
+
+<div class="feedback-dashboard">
+
+
+<div class="panel">
+
+<h3>
+Customer Sentiment
+</h3>
+
+<div class="sentiment">
+
+<div class="sent-card">
+<strong style="color:#22C55E">
+72%
+</strong>
+<small>😊 Positive</small>
+</div>
+
+<div class="sent-card">
+<strong style="color:#F59E0B">
+18%
+</strong>
+<small>😐 Neutral</small>
+</div>
+
+<div class="sent-card">
+<strong style="color:#EF4444">
+10%
+</strong>
+<small>😕 Negative</small>
+</div>
+
+</div>
+
+<h4 style="margin-top:20px">
+Common Feedback
+</h4>
+
+<div class="progress-row">
+<div class="progress-label">
+<span>Too expensive</span>
+<strong>32%</strong>
+</div>
+<div class="progress">
+<span style="width:32%"></span>
+</div>
+</div>
+
+<div class="progress-row">
+<div class="progress-label">
+<span>Love the design</span>
+<strong>28%</strong>
+</div>
+<div class="progress">
+<span style="width:28%"></span>
+</div>
+</div>
+
+<div class="progress-row">
+<div class="progress-label">
+<span>Want more colors</span>
+<strong>21%</strong>
+</div>
+<div class="progress">
+<span style="width:21%"></span>
+</div>
+</div>
+
+<div class="progress-row">
+<div class="progress-label">
+<span>Delivery is slow</span>
+<strong>19%</strong>
+</div>
+<div class="progress">
+<span style="width:19%"></span>
+</div>
+</div>
+
+</div>
+
+
+<div class="panel">
+
+<h3>
+Recent Customer Feedback
+</h3>
+
+<div class="card" style="margin-top:15px;background:#f9f8ff">
+
+⭐⭐⭐⭐⭐
+
+<p style="margin-top:5px">
+“Beautiful design and excellent quality.
+I loved the customization.”
+</p>
+
+<small>
+— Priya • 2 days ago
+</small>
+
+</div>
+
+
+<div class="card" style="margin-top:10px;background:#fffaf0">
+
+⭐⭐⭐
+
+<p style="margin-top:5px">
+“₹599 feels a little expensive for a tote bag.”
+</p>
+
+<small>
+— Ananya • 3 days ago
+</small>
+
+</div>
+
+
+<div class="card" style="margin-top:10px;background:#f5fff8">
+
+⭐⭐⭐⭐
+
+<p style="margin-top:5px">
+“Can you make this in more colors?”
+</p>
+
+<small>
+— Rahul • 4 days ago
+</small>
+
+</div>
+
+</div>
+
+</div>
+</div>
+</section>
+
+
+<!-- =========================================================
+     PIVOT
+========================================================= -->
+
+<section class="section pivot-section" id="pivot">
+
+<div class="container">
+
+<div class="section-head">
+
+<div class="eyebrow">
+Our Differentiator
+</div>
+
+<h2>
+Don't Just Sell. Learn. Pivot. Grow.
+</h2>
+
+<p>
+Your customers continuously teach you how to improve.
+</p>
+
+</div>
+
+
+<div class="pivot-layout">
+
+
+<div class="loop">
+
+<div class="loop-item">SELL</div>
+<div class="loop-item">FEEDBACK</div>
+<div class="loop-item">AI ANALYSIS</div>
+<div class="loop-item">INSIGHT</div>
+<div class="loop-item">RECOMMEND</div>
+<div class="loop-item">SELL AGAIN</div>
+
+<div class="loop-center">
+AI PIVOT<br>&<br>GROW ENGINE
+</div>
+
+</div>
+
+
+<div class="feedback-box">
+
+<span style="color:#a99cff;font-weight:800">
+CUSTOMER FEEDBACK
+</span>
+
+<div class="quote">
+“₹599 feels expensive for this product.”
+</div>
+
+<div class="insight">
+
+<strong>
+✨ AI Insight
+</strong>
+
+<p style="color:#aaa;margin-top:5px">
+Price sensitivity appears to be affecting conversions.
+</p>
+
+</div>
+
+
+<div class="recommendation">
+
+<strong>
+Recommendation 1
+</strong>
+
+<p>
+Create a smaller version at ₹399.
+</p>
+
+<div class="rec-actions">
+
+<button
+class="btn btn-success btn-small"
+onclick="approvePivot()">
+✓ Approve
+</button>
+
+<button
+class="btn btn-danger btn-small"
+onclick="toast('Recommendation rejected')">
+Reject
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+</div>
+</section>
+
+
+<!-- =========================================================
+     SALES ASSISTANT
+========================================================= -->
+
+<section class="section" id="salesAssistant">
+
+<div class="container">
+
+<div class="section-head">
+
+<div class="eyebrow">
+AI Sales Assistant
+</div>
+
+<h2>
+Your AI Sales Assistant Never Sleeps.
+</h2>
+
+<p>
+Let AI handle repetitive customer conversations.
+</p>
+
+</div>
+
+
+<div class="chat">
+
+<div class="chat-head">
+
+<div class="avatar">
+AI
+</div>
+
+<div>
+
+<strong>
+Skill2Sell AI Sales Assistant
+</strong>
+
+<small style="display:block;color:#22C55E">
+● Online
+</small>
+
+</div>
+
+</div>
+
+
+<div class="message customer">
+Hi, how much is this tote bag?
+</div>
+
+
+<div class="message ai" id="aiReply">
+
+Hi! 😊 Our custom hand-painted tote bags start at ₹399.
+You can personalize the design too.
+
+</div>
+
+
+<div class="chat-actions">
+
+<button
+class="btn btn-secondary btn-small"
+onclick="generateReply('discount')">
+Generate Reply
+</button>
+
+<button
+class="btn btn-secondary btn-small"
+onclick="generateReply('product')">
+Recommend Product
+</button>
+
+<button
+class="btn btn-secondary btn-small"
+onclick="generateReply('quote')">
+Create Quote
+</button>
+
+<button
+class="btn btn-primary btn-small"
+onclick="generateReply('order')">
+Confirm Order
+</button>
+
+</div>
+
+</div>
+</div>
+</section>
+
+
+<!-- =========================================================
+     CONTENT
+========================================================= -->
+
+<section class="section" style="background:var(--gray)" id="content">
+
+<div class="container">
+
+<div class="section-head">
+
+<div class="eyebrow">
+Content Studio
+</div>
+
+<h2>
+Turn Products Into Content
+</h2>
+
+</div>
+
+
+<div class="panel">
+
+<div class="tabs">
+
+<button
+class="tab active"
+onclick="changeContent('caption',this)">
+Instagram Caption
+</button>
+
+<button
+class="tab"
+onclick="changeContent('reel',this)">
+Reel Idea
+</button>
+
+<button
+class="tab"
+onclick="changeContent('story',this)">
+Story
+</button>
+
+<button
+class="tab"
+onclick="changeContent('hashtags',this)">
+Hashtags
+</button>
+
+</div>
+
+
+<div class="content-output"
+id="contentOutput">
+
+Made by hand. Made for you. 🎨
+
+Turn everyday moments into something personal
+with our custom-painted tote bags.
+
+</div>
+
+
+<div class="content-actions">
+
+<button
+class="btn btn-primary btn-small"
+onclick="copyContent()">
+Copy
+</button>
+
+<button
+class="btn btn-secondary btn-small"
+onclick="regenerateContent()">
+Regenerate
+</button>
+
+</div>
+
+</div>
+</div>
+</section>
+
+
+<!-- =========================================================
+     DASHBOARD
+========================================================= -->
+
+<section class="section" id="dashboard">
+
+<div class="container">
+
+<div class="section-head">
+
+<div class="eyebrow">
+Business Dashboard
+</div>
+
+<h2>
+Your Entire Small Business Journey in One Place
+</h2>
+
+</div>
+
+
+<div class="dashboard">
+
+<aside class="sidebar">
+
+<h3>
+Skill2Sell AI
+</h3>
+
+<div class="side-link active"
+onclick="dashNav(this)">
+Overview
+</div>
+
+<div class="side-link"
+onclick="scrollToId('products')">
+My Products
+</div>
+
+<div class="side-link"
+onclick="scrollToId('materials')">
+Find Materials
+</div>
+
+<div class="side-link"
+onclick="scrollToId('sales')">
+Sales Analytics
+</div>
+
+<div class="side-link"
+onclick="scrollToId('salesAssistant')">
+Sales Assistant
+</div>
+
+<div class="side-link"
+onclick="scrollToId('feedback')">
+Customer Feedback
+</div>
+
+<div class="side-link"
+onclick="scrollToId('pivot')">
+Pivot & Grow
+</div>
+
+</aside>
+
+
+<div class="dash-main">
+
+<h3>
+Good Morning, Creator 👋
+</h3>
+
+<p style="color:#777">
+Here is your current business performance.
+</p>
+
+
+<div class="stats">
+
+<div class="stat">
+
+<small>
+Revenue Today
+</small>
+
+<strong id="dashTodayRevenue">
+₹0
+</strong>
+
+</div>
+
+
+<div class="stat">
+
+<small>
+Orders Today
+</small>
+
+<strong id="dashTodayOrders">
+0
+</strong>
+
+</div>
+
+
+<div class="stat">
+
+<small>
+Weekly Orders
+</small>
+
+<strong id="dashWeekOrders">
+0
+</strong>
+
+</div>
+
+
+<div class="stat">
+
+<small>
+Weekly Revenue
+</small>
+
+<strong style="color:#22C55E"
+id="dashWeekRevenue">
+₹0
+</strong>
+
+</div>
+
+</div>
+
+
+<div class="panel">
+
+<div style="
+display:flex;
+justify-content:space-between;
+">
+
+<strong>
+Sales Performance
+</strong>
+
+<span
+style="color:#22C55E"
+id="dashboardRate">
+0%
+</span>
+
+</div>
+
+
+<div class="chart"
+id="salesChart">
+
+<div class="bar" style="height:20%"></div>
+<div class="bar" style="height:35%"></div>
+<div class="bar" style="height:30%"></div>
+<div class="bar" style="height:45%"></div>
+<div class="bar" style="height:55%"></div>
+<div class="bar" style="height:70%"></div>
+<div class="bar" style="height:85%"></div>
+
+</div>
+
+</div>
+
+
+<div class="panel" style="margin-top:15px">
+
+<strong>
+Business Recommendation
+</strong>
+
+<p style="color:#777;margin-top:8px"
+id="dashboardRecommendation">
+
+Record your first sale to let Skill2Sell AI
+start calculating your selling rate.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+</section>
+
+
+<!-- =========================================================
+     FINAL CTA
+========================================================= -->
+
+<section class="section" style="text-align:center">
+
+<div class="container">
+
+<div class="badge">
+✦ Start Your Journey
+</div>
+
+<h2 style="
+font-size:clamp(35px,5vw,55px);
+color:var(--navy);
+">
+
+Your Skill Could Be Your Next Business.
+
+</h2>
+
+<p style="
+color:#777;
+max-width:600px;
+margin:15px auto 25px;
+">
+
+Start with what you know.
+Let AI help you find materials,
+build your product and start selling.
+
+</p>
+
+<button
+class="btn btn-primary"
+onclick="scrollToId('builder')">
+
+Build My Business with AI →
+
+</button>
+
+</div>
+</section>
+
+
+<!-- =========================================================
+     FOOTER
+========================================================= -->
+
+<footer>
+
+<div class="container">
+
+<div class="footer-grid">
+
+<div>
+
+<div class="logo" style="color:white">
+
+<span class="logo-icon">✦</span>
+Skill2Sell AI
+
+</div>
+
+<p style="margin-top:12px">
+Turn skills into businesses. Grow with AI.
+</p>
+
+</div>
+
+
+<div>
+
+<h3>
+Product
+</h3>
+
+<a href="#builder">
+AI Business Builder
+</a>
+
+<a href="#materials">
+Material Finder
+</a>
+
+<a href="#products">
+My Products
+</a>
+
+<a href="#sales">
+Sales Analytics
+</a>
+
+</div>
+
+
+<div>
+
+<h3>
+Business
+</h3>
+
+<a href="#salesAssistant">
+Sales Assistant
+</a>
+
+<a href="#feedback">
+Customer Feedback
+</a>
+
+<a href="#pivot">
+Pivot & Grow
+</a>
+
+</div>
+
+
+<div>
+
+<h3>
+Resources
+</h3>
+
+<a href="#dashboard">
+Dashboard
+</a>
+
+<a href="#content">
+Content Studio
+</a>
+
+<a href="#how">
+How It Works
+</a>
+
+</div>
+
+</div>
+
+
+<div class="footer-bottom">
+
+© 2026 Skill2Sell AI.
+All rights reserved.
+
+</div>
+
+</div>
+</footer>
+
+
+<!-- =========================================================
+     ADD PRODUCT MODAL
+========================================================= -->
+
+<div class="modal" id="productModal">
+
+<div class="modal-box">
+
+<div class="modal-head">
+
+<h2>
+Add Your Product
+</h2>
+
+<button
+class="close"
+onclick="closeModal('productModal')">
+×
+</button>
+
+</div>
+
+
+<div class="input-group">
+
+<label>
+Product Name
+</label>
+
+<input
+id="newProductName"
+placeholder="Example: Custom Painted Bag"
+>
+
+</div>
+
+
+<div class="input-group">
+
+<label>
+Product Image
+</label>
+
+<input
+id="newProductImage"
+type="file"
+accept="image/*"
+onchange="previewImage(event)"
+>
+
+<div
+id="imagePreview"
+style="margin-top:10px">
+</div>
+
+</div>
+
+
+<div class="input-group">
+
+<label>
+Product Description
+</label>
+
+<textarea
+id="newProductDescription"
+rows="3"
+placeholder="Describe your product..."
+></textarea>
+
+</div>
+
+
+<div class="input-group">
+
+<label>
+Selling Price
+</label>
+
+<input
+id="newProductPrice"
+type="number"
+placeholder="399"
+>
+
+</div>
+
+
+<div class="input-group">
+
+<label>
+Production Cost
+</label>
+
+<input
+id="newProductCost"
+type="number"
+placeholder="180"
+>
+
+</div>
+
+
+<div class="input-group">
+
+<label>
+Available Stock
+</label>
+
+<input
+id="newProductStock"
+type="number"
+placeholder="10"
+>
+
+</div>
+
+
+<button
+class="btn btn-primary"
+style="width:100%"
+onclick="addProduct()">
+
++ Add Product
+
+</button>
+
+</div>
+</div>
+
+
+<!-- =========================================================
+     SALE MODAL
+========================================================= -->
+
+<div class="modal" id="saleModal">
+
+<div class="modal-box">
+
+<div class="modal-head">
+
+<h2>
+Record Sale
+</h2>
+
+<button
+class="close"
+onclick="closeModal('saleModal')">
+×
+</button>
+
+</div>
+
+
+<div class="input-group">
+
+<label>
+Product
+</label>
+
+<input
+id="saleProduct"
+readonly
+>
+
+</div>
+
+
+<div class="input-group">
+
+<label>
+Quantity Sold
+</label>
+
+<input
+id="saleQuantity"
+type="number"
+value="1"
+min="1"
+>
+
+</div>
+
+
+<div class="input-group">
+
+<label>
+Selling Price Per Unit
+</label>
+
+<input
+id="salePrice"
+type="number"
+>
+
+</div>
+
+
+<button
+class="btn btn-success"
+style="width:100%"
+onclick="recordSale()">
+
+✓ Record Sale
+
+</button>
+
+</div>
+</div>
+
+
+<!-- =========================================================
+     FEEDBACK MODAL
+========================================================= -->
+
+<div class="modal" id="feedbackModal">
+
+<div class="modal-box">
+
+<div class="modal-head">
+
+<div>
+
+<h2>
+Product Feedback
+</h2>
+
+<small style="color:#777">
+Custom Hand-Painted Tote Bag
+</small>
+
+</div>
+
+<button
+class="close"
+onclick="closeModal('feedbackModal')">
+×
+</button>
+
+</div>
+
+
+<div class="panel"
+style="background:var(--gray);margin-bottom:15px">
+
+<strong>
+AI Feedback Summary
+</strong>
+
+<p style="margin-top:7px">
+
+Customers strongly like the design and customization.
+However, price sensitivity is the biggest concern.
+
+</p>
+
+</div>
+
+
+<div class="card">
+
+⭐⭐⭐⭐⭐
+
+<p>
+“Beautiful design and excellent quality.”
+</p>
+
+<small>
+Priya • Positive
+</small>
+
+</div>
+
+
+<div class="card" style="margin-top:10px">
+
+⭐⭐⭐
+
+<p>
+“₹599 feels expensive for this product.”
+</p>
+
+<small>
+Ananya • Price Concern
+</small>
+
+</div>
+
+
+<div class="card" style="margin-top:10px">
+
+⭐⭐⭐⭐
+
+<p>
+“Can you make this in more colors?”
+</p>
+
+<small>
+Rahul • Customization
+</small>
+
+</div>
+
+
+</div>
+</div>
+
+
+<!-- =========================================================
+     TOAST
+========================================================= -->
+
+
+<!-- LOGIN / SIGNUP MODAL -->
+<div class="modal" id="loginModal" role="dialog" aria-modal="true" aria-labelledby="authTitle">
+  <div class="modal-box auth-box">
+    <div class="modal-head">
+      <div class="auth-brand"><span class="logo-icon">✦</span> Skill2Sell AI</div>
+      <button class="close" type="button" onclick="closeModal('loginModal')" aria-label="Close">×</button>
+    </div>
+    <h2 id="authTitle">Welcome back</h2>
+    <p class="auth-subtitle" id="authSubtitle">Log in to manage your seller workspace.</p>
+    <div class="auth-tabs">
+      <button type="button" id="loginTab" class="auth-tab active" onclick="setAuthMode('login')">Login</button>
+      <button type="button" id="signupTab" class="auth-tab" onclick="setAuthMode('signup')">Create account</button>
+    </div>
+    <form id="authForm" onsubmit="handleAuth(event)">
+      <div class="input-group" id="authNameGroup" style="display:none">
+        <label for="authName">Your name</label><input id="authName" autocomplete="name" placeholder="Enter your name">
+      </div>
+      <div class="input-group">
+        <label for="authEmail">Email address</label><input id="authEmail" type="email" autocomplete="email" required placeholder="you@example.com">
+      </div>
+      <div class="input-group">
+        <label for="authPassword">Password</label><input id="authPassword" type="password" autocomplete="current-password" minlength="6" required placeholder="At least 6 characters">
+      </div>
+      <div class="auth-error" id="authError" role="alert"></div>
+      <button class="btn btn-primary" id="authSubmit" type="submit" style="width:100%">Login</button>
+    </form>
+    <p class="auth-note">Demo sign-in stores account data only in this browser. Do not use a real or reused password. For production, connect a secure backend authentication service.</p>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+
+<script>
+
+/* =========================================================
+   GLOBAL DATA
+========================================================= */
+
+
+/* =========================================================
+   DEMO AUTHENTICATION (browser-only; not production security)
+========================================================= */
+let authMode = "login";
+function getAuthUsers(){
+  try { return JSON.parse(localStorage.getItem("skill2sell_demo_users") || "{}"); }
+  catch(e){ return {}; }
+}
+function getCurrentUser(){
+  try { return JSON.parse(localStorage.getItem("skill2sell_current_user") || "null"); }
+  catch(e){ return null; }
+}
+function refreshAuthButton(){
+  const button=document.getElementById("loginNavButton");
+  const user=getCurrentUser();
+  if(!button) return;
+  if(user){ button.textContent="Logout"; button.onclick=logoutUser; button.title=user.email; }
+  else { button.textContent="Login"; button.onclick=openLogin; button.title="Login or create an account"; }
+}
+function openLogin(){
+  const user=getCurrentUser();
+  if(user){ toast("You are logged in as "+user.email); return; }
+  setAuthMode("login");
+  document.getElementById("loginModal").classList.add("show");
+}
+function setAuthMode(mode){
+  authMode=mode;
+  const signup=mode==="signup";
+  document.getElementById("authTitle").textContent=signup?"Create your seller account":"Welcome back";
+  document.getElementById("authSubtitle").textContent=signup?"Create an account to start your business workspace.":"Log in to manage your seller workspace.";
+  document.getElementById("authSubmit").textContent=signup?"Create account":"Login";
+  document.getElementById("authNameGroup").style.display=signup?"block":"none";
+  document.getElementById("authName").required=signup;
+  document.getElementById("authPassword").autocomplete=signup?"new-password":"current-password";
+  document.getElementById("loginTab").classList.toggle("active",!signup);
+  document.getElementById("signupTab").classList.toggle("active",signup);
+  const err=document.getElementById("authError"); err.style.display="none"; err.textContent="";
+}
+function handleAuth(event){
+  event.preventDefault();
+  const email=document.getElementById("authEmail").value.trim().toLowerCase();
+  const password=document.getElementById("authPassword").value;
+  const name=document.getElementById("authName").value.trim();
+  const error=document.getElementById("authError");
+  const fail=(message)=>{error.textContent=message;error.style.display="block";};
+  if(!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){fail("Please enter a valid email address.");return;}
+  if(password.length<6){fail("Password must contain at least 6 characters.");return;}
+  const users=getAuthUsers();
+  if(authMode==="signup"){
+    if(!name){fail("Please enter your name.");return;}
+    if(users[email]){fail("An account with this email already exists. Please log in.");return;}
+    users[email]={name:name,password:password};
+    localStorage.setItem("skill2sell_demo_users",JSON.stringify(users));
+  } else {
+    if(!users[email] || users[email].password!==password){fail("Email or password is incorrect. If you are new, choose Create account.");return;}
+  }
+  const profile=users[email];
+  localStorage.setItem("skill2sell_current_user",JSON.stringify({name:profile.name,email:email}));
+  document.getElementById("authForm").reset();
+  closeModal("loginModal"); refreshAuthButton();
+  toast("Welcome "+profile.name+"! You are logged in.");
+}
+function logoutUser(){
+  localStorage.removeItem("skill2sell_current_user");
+  refreshAuthButton();
+  toast("You have logged out.");
+}
+document.addEventListener("keydown",function(event){if(event.key==="Escape") closeModal("loginModal");});
+
+let currentSaleProduct = null;
+let uploadedImage = null;
+
+let sales = JSON.parse(
+  localStorage.getItem("skill2sell_sales") || "[]"
+);
+
+
+/* =========================================================
+   BASIC FUNCTIONS
+========================================================= */
+
+function scrollToId(id){
+
+  const element=document.getElementById(id);
+
+  if(element){
+    element.scrollIntoView({
+      behavior:"smooth"
+    });
+  }
+
+}
+
+
+function toast(message){
+
+  const t=document.getElementById("toast");
+
+  t.textContent=message;
+
+  t.classList.add("show");
+
+  setTimeout(()=>{
+    t.classList.remove("show");
+  },2500);
+
+}
+
+
+function closeModal(id){
+
+  document
+    .getElementById(id)
+    .classList.remove("show");
+
+}
+
+
+/* =========================================================
+   MOBILE MENU
+========================================================= */
+
+function toggleMenu(){
+
+  const nav=document.querySelector(".nav-links");
+
+  if(nav.style.display==="flex"){
+
+    nav.style.display="";
+
+  }else{
+
+    nav.style.display="flex";
+    nav.style.position="absolute";
+    nav.style.top="72px";
+    nav.style.left="0";
+    nav.style.right="0";
+    nav.style.padding="20px";
+    nav.style.background="white";
+    nav.style.flexDirection="column";
+    nav.style.borderBottom="1px solid #eee";
+
+  }
+
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+function generateHero(){
+
+  const result=document.getElementById("heroResult");
+
+  result.style.opacity=".5";
+
+  setTimeout(()=>{
+
+    result.style.opacity="1";
+
+    toast("✨ AI business plan generated");
+
+  },700);
+
+}
+
+
+/* =========================================================
+   BUSINESS BUILDER
+========================================================= */
+
+function generateBusiness(){
+
+  const skill=
+    document.getElementById("skillInput").value
+    || "Your Skill";
+
+  const budget=
+    document.getElementById("budgetInput").value
+    || "2000";
+
+
+  document.getElementById("blueprint").innerHTML=`
+
+  <div
+  class="badge"
+  style="background:#302a4d;color:#bcaeff">
+
+  AI Generated
+
+  </div>
+
+
+  <h3>
+  Your AI Business Blueprint
+  </h3>
+
+
+  <p style="color:#bcb9c9;margin-top:5px">
+
+  Based on ${escapeHTML(skill)}
+  + ₹${Number(budget).toLocaleString("en-IN")}
+
+  </p>
+
+
+  <div class="product-mini-grid">
+
+
+  <div class="product-mini">
+
+  <small>
+  Recommended Product
+  </small>
+
+  <strong>
+  Custom ${escapeHTML(skill)} Product
+  </strong>
+
+  <div class="price">
+  ₹399
+  </div>
+
+  <small>
+  Estimated Profit: ₹219
+  </small>
+
+  <div class="score">
+  <span style="width:87%"></span>
+  </div>
+
+  <small>
+  Demand 87%
+  </small>
+
+  </div>
+
+
+  <div class="product-mini">
+
+  <small>
+  Budget Option
+  </small>
+
+  <strong>
+  Mini Product
+  </strong>
+
+  <div class="price">
+  ₹249
+  </div>
+
+  <small>
+  Estimated Profit: ₹129
+  </small>
+
+  <div class="score">
+  <span style="width:76%"></span>
+  </div>
+
+  <small>
+  Demand 76%
+  </small>
+
+  </div>
+
+
+  <div class="product-mini">
+
+  <small>
+  Premium Option
+  </small>
+
+  <strong>
+  Gift Bundle
+  </strong>
+
+  <div class="price">
+  ₹599
+  </div>
+
+  <small>
+  Estimated Profit: ₹299
+  </small>
+
+  <div class="score">
+  <span style="width:82%"></span>
+  </div>
+
+  <small>
+  Demand 82%
+  </small>
+
+  </div>
+
+  </div>
+
+
+  <div style="margin-top:22px">
+
+  <strong>
+  Recommended Materials
+  </strong>
+
+  <p style="color:#bcb9c9">
+
+  Canvas tote bags • Fabric paints • Brushes •
+  Packaging bags • Thank-you cards
+
+  </p>
+
+
+  <button
+  class="btn btn-primary btn-small"
+  style="margin-top:10px"
+  onclick="scrollToId('materials')">
+
+  📍 Find These Materials
+
+  </button>
+
+  </div>
+
+  `;
+
+
+  toast("✨ AI generated your business blueprint");
+
+}
+
+
+/* =========================================================
+   MATERIAL FINDER
+========================================================= */
+
+function getSelectedMaterials(){
+  const selected=[];
+  document.querySelectorAll(".material-option input:checked").forEach(input=>{
+    selected.push({name:input.dataset.name,search:input.dataset.search});
+  });
+
+  const custom=(document.getElementById("customMaterialInput")?.value || "").trim();
+  if(custom){
+    selected.push({
+      name:custom,
+      search:inferSupplierCategory(custom)
+    });
+  }
+  return selected;
+}
+
+function inferSupplierCategory(material){
+  const m=material.toLowerCase();
+  if(/fabric|cloth|canvas|cotton|silk|denim|jute/.test(m)) return "fabric shops and textile markets";
+  if(/paint|colour|color|dye|pigment/.test(m)) return "art supply stores and paint shops";
+  if(/brush|marker|pencil|stationery/.test(m)) return "art and stationery stores";
+  if(/bead|lace|ribbon|thread|zip|button|accessor/.test(m)) return "craft and tailoring supply shops";
+  if(/pack|box|bag|bubble|sticker|label/.test(m)) return "packaging material shops";
+  if(/wood|plywood|acrylic sheet|foam|resin|clay/.test(m)) return "craft material and hardware suppliers";
+  if(/electronic|led|wire|battery|sensor|arduino/.test(m)) return "electronics component stores";
+  if(/food|flour|sugar|chocolate|spice|ingredient/.test(m)) return "wholesale grocery and food ingredient stores";
+  if(/print|card|paper|sticker/.test(m)) return "printing and stationery shops";
+  return "specialist material suppliers and local wholesale markets";
+}
+
+function aiMaterialAdvice(material){
+  const m=material.name.toLowerCase();
+  let tip="Compare at least 2–3 nearby sellers before buying, and ask for a small quantity or wholesale price.";
+  if(/fabric|cloth|canvas|cotton|silk|denim|jute/.test(m)) tip="Ask for fabric by metre and compare GSM, quality and bulk price. Buying a small test quantity first can reduce waste.";
+  else if(/paint|colour|color|dye|pigment/.test(m)) tip="Compare colour range, quantity and price per ml/pack. Choose reliable quality so your finished products look consistent.";
+  else if(/bead|lace|ribbon|thread|zip|button/.test(m)) tip="Ask for mixed packs or bulk rates. Matching accessories can help you create bundles and increase product value.";
+  else if(/pack|box|bag|bubble|sticker|label/.test(m)) tip="Compare unit cost in small and bulk quantities. Simple branded packaging can improve the customer experience without a large cost.";
+  else if(/electronic|led|wire|battery|sensor|arduino/.test(m)) tip="Check specifications and compatibility before buying. Prefer suppliers who provide model/specification details.";
+  return tip;
+}
+
+function buildMaterialCard(material, locationText, coords){
+  const queryText=`${material.search} ${locationText || "near me"}`.trim();
+  const mapsUrl=coords
+    ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(material.search)}&center=${coords.lat},${coords.lng}`
+    : `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(queryText)}`;
+  const searchUrl=`https://www.google.com/search?q=${encodeURIComponent(material.search+" suppliers "+(locationText||"near me"))}`;
+  return `
+    <div class="ai-suggestion">
+      <span class="material-tag">${escapeHTML(material.name)}</span>
+      <div class="suggestion-title">🤖 AI sourcing suggestion</div>
+      <div class="suggestion-meta">Recommended supplier type: ${escapeHTML(material.search)}</div>
+      ${locationText ? `<span class="location-pill">📍 ${escapeHTML(locationText)}</span>` : `<span class="location-pill">📍 Nearby area</span>`}
+      <p style="margin:9px 0">${escapeHTML(aiMaterialAdvice(material))}</p>
+      <div class="location-actions">
+        <button class="btn btn-primary btn-small" onclick="openMap('${mapsUrl}')">📍 View Nearby</button>
+        <button class="btn btn-secondary btn-small" onclick="openMap('${searchUrl}')">🔎 Search Suppliers</button>
+      </div>
+    </div>`;
+}
+
+function renderMaterialSuggestions(materials, locationText, coords){
+  const result=document.getElementById("materialResults");
+  const status=document.getElementById("locationStatus");
+  status.innerHTML=locationText
+    ? `AI suggestions prepared for <strong>${escapeHTML(locationText)}</strong>.`
+    : "AI suggestions prepared for your nearby area.";
+  result.innerHTML=`<div class="ai-location-note"><strong>✨ AI Seller Recommendation</strong><span>Based on your material input, start with the supplier types below. Open “View Nearby” to see local shops and markets on the map.</span></div>`
+    +materials.map(m=>buildMaterialCard(m,locationText,coords)).join("");
+  renderMaterialChecklist(materials);
+  toast("✨ AI material and location suggestions ready");
+}
+
+function findMaterials(){
+  const materials=getSelectedMaterials();
+  if(materials.length===0){
+    toast("Enter a material or select at least one material.");
+    return;
+  }
+  const manual=(document.getElementById("manualLocationInput")?.value || "").trim();
+  if(manual){
+    renderMaterialSuggestions(materials,manual,null);
+    return;
+  }
+  if(!navigator.geolocation){
+    renderMaterialSuggestions(materials,"your area",null);
+    return;
+  }
+  document.getElementById("locationStatus").textContent="📍 Getting your location to prepare nearby suggestions...";
+  navigator.geolocation.getCurrentPosition(
+    pos=>renderMaterialSuggestions(materials,"your current area",{lat:pos.coords.latitude,lng:pos.coords.longitude}),
+    ()=>renderMaterialSuggestions(materials,"your area",null),
+    {enableHighAccuracy:false,timeout:10000,maximumAge:300000}
+  );
+}
+
+function useCurrentLocation(){
+  if(!navigator.geolocation){
+    toast("Your browser does not support location.");
+    return;
+  }
+  const materials=getSelectedMaterials();
+  if(materials.length===0){
+    toast("Enter a material or select at least one material first.");
+    return;
+  }
+  toast("📍 Requesting your location...");
+  navigator.geolocation.getCurrentPosition(
+    position=>{
+      const coords={lat:position.coords.latitude,lng:position.coords.longitude};
+      const input=document.getElementById("manualLocationInput");
+      if(input) input.value="Current location";
+      renderMaterialSuggestions(materials,"your current area",coords);
+    },
+    ()=>{
+      toast("Location permission was not granted. Enter your area manually instead.");
+    },
+    {enableHighAccuracy:false,timeout:10000,maximumAge:300000}
+  );
+}
+
+function renderMaterialChecklist(materials){
+
+  const container=
+    document.getElementById("materialChecklist");
+
+
+  container.innerHTML=materials.map((material,index)=>`
+
+    <label class="checklist-item">
+
+      <input
+      type="checkbox"
+      onchange="updateChecklist()"
+      id="material-check-${index}"
+      >
+
+      <span>
+      ${escapeHTML(material.name)}
+      </span>
+
+    </label>
+
+  `).join("");
+
+}
+
+
+function updateChecklist(){
+
+  const checks=
+    document.querySelectorAll(
+      "#materialChecklist input"
+    );
+
+  let completed=0;
+
+  checks.forEach(check=>{
+
+    if(check.checked){
+      completed++;
+    }
+
+  });
+
+
+  if(checks.length>0){
+
+    toast(
+      `${completed}/${checks.length} materials collected`
+    );
+
+  }
+
+}
+
+
+/*
+  Browser geolocation is optional.
+  It doesn't send the location to our server.
+  It only helps construct a Google Maps search.
+*/
+
+function useCurrentLocation(){
+
+  if(!navigator.geolocation){
+
+    toast(
+      "Your browser does not support location."
+    );
+
+    return;
+
+  }
+
+
+  toast("📍 Requesting your location...");
+
+
+  navigator.geolocation.getCurrentPosition(
+
+    position=>{
+
+      const lat=position.coords.latitude;
+      const lng=position.coords.longitude;
+
+
+      const materials=getSelectedMaterials();
+
+
+      if(materials.length===0){
+
+        toast(
+          "Select materials first."
+        );
+
+        return;
+
+      }
+
+
+      const result=
+        document.getElementById(
+          "materialResults"
+        );
+
+
+      document.getElementById(
+        "locationStatus"
+      ).innerHTML=
+        `Location detected. Searching around your current area.`;
+
+
+      result.innerHTML=materials.map(material=>{
+
+        const query=
+          encodeURIComponent(
+            material.search
+          );
+
+
+        const mapsUrl=
+          `https://www.google.com/maps/search/?api=1&query=${query}&query_place_id=&center=${lat},${lng}`;
+
+
+        return `
+
+        <div class="location-card">
+
+        <span class="material-tag">
+        ${escapeHTML(material.name)}
+        </span>
+
+        <h3 style="margin-top:8px">
+        Nearby ${escapeHTML(material.search)}
+        </h3>
+
+        <p>
+        Open the map to see shops and suppliers
+        around your current location.
+        </p>
+
+        <div class="location-actions">
+
+        <button
+        class="btn btn-primary btn-small"
+        onclick="openMap('${mapsUrl}')">
+
+        📍 Open Nearby Map
+
+        </button>
+
+        </div>
+
+        </div>
+
+        `;
+
+      }).join("");
+
+
+      renderMaterialChecklist(materials);
+
+      toast("✓ Nearby material guide created");
+
+    },
+
+    ()=>{
+
+      toast(
+        "Location permission was not granted. You can still use map searches."
+      );
+
+    }
+
+  );
+
+}
+
+
+function openMap(url){
+
+  window.open(
+    url,
+    "_blank",
+    "noopener,noreferrer"
+  );
+
+}
+
+
+function searchWeb(query){
+
+  window.open(
+    "https://www.google.com/search?q="+query,
+    "_blank",
+    "noopener,noreferrer"
+  );
+
+}
+
+
+/* =========================================================
+   PRODUCT IMAGE UPLOAD
+========================================================= */
+
+function openAddProduct(){
+
+  document
+    .getElementById("productModal")
+    .classList.add("show");
+
+}
+
+
+function previewImage(event){
+
+  const file=
+    event.target.files[0];
+
+  if(!file)return;
+
+
+  const reader=
+    new FileReader();
+
+
+  reader.onload=function(e){
+
+    uploadedImage=e.target.result;
+
+
+    document.getElementById(
+      "imagePreview"
+    ).innerHTML=`
+
+      <img
+      src="${uploadedImage}"
+      style="
+      width:140px;
+      height:140px;
+      object-fit:cover;
+      border-radius:14px;
+      border:1px solid #eee;
+      ">
+
+    `;
+
+  };
+
+
+  reader.readAsDataURL(file);
+
+}
+
+
+/* =========================================================
+   ADD PRODUCT
+========================================================= */
+
+function addProduct(){
+
+  const name=
+    document
+      .getElementById("newProductName")
+      .value
+      .trim();
+
+
+  const description=
+    document
+      .getElementById("newProductDescription")
+      .value
+      .trim();
+
+
+  const price=
+    Number(
+      document
+        .getElementById("newProductPrice")
+        .value
+    );
+
+
+  const cost=
+    Number(
+      document
+        .getElementById("newProductCost")
+        .value
+    );
+
+
+  const stock=
+    Number(
+      document
+        .getElementById("newProductStock")
+        .value
+    );
+
+
+  if(!name || !price || !cost){
+
+    toast(
+      "Please enter product name, price and cost."
+    );
+
+    return;
+
+  }
+
+
+  const profit=
+    price-cost;
+
+
+  const image=
+    uploadedImage
+      ? `<img src="${uploadedImage}">`
+      : "🛍️";
+
+
+  const id=
+    "product-"+Date.now();
+
+
+  const card=
+    document.createElement("div");
+
+
+  card.className="product-card";
+
+
+  card.dataset.product=id;
+
+
+  card.innerHTML=`
+
+  <div class="product-image">
+  ${image}
+  </div>
+
+
+  <div class="product-body">
+
+  <h3>
+  ${escapeHTML(name)}
+  </h3>
+
+  <p style="font-size:13px;color:#777">
+  ${escapeHTML(description || "New seller product")}
+  </p>
+
+
+  <div class="product-meta">
+  <span>Price</span>
+  <strong>₹${price}</strong>
+  </div>
+
+
+  <div class="product-meta">
+  <span>Cost</span>
+  <strong>₹${cost}</strong>
+  </div>
+
+
+  <div class="product-meta">
+  <span>Stock</span>
+  <strong>${stock}</strong>
+  </div>
+
+
+  <div class="product-meta">
+  <span>Sales Today</span>
+  <strong id="today-${id}">0</strong>
+  </div>
+
+
+  <div class="product-meta">
+  <span>Sales This Week</span>
+  <strong id="week-${id}">0</strong>
+  </div>
+
+
+  <div class="product-meta">
+
+  <span>
+  Estimated Profit
+  </span>
+
+  <span class="profit">
+  ₹${profit}
+  </span>
+
+  </div>
+
+
+  <div class="product-buttons">
+
+  <button
+  class="btn btn-success btn-small"
+  onclick="openSaleModal('${id}', '${escapeAttribute(name)}', ${price})">
+
+  + Sale
+
+  </button>
+
+
+  <button
+  class="btn btn-primary btn-small"
+  onclick="toast('Product editing can be connected to your database.')">
+
+  Edit
+
+  </button>
+
+
+  <button
+  class="btn btn-small"
+  style="background:#F0EDFF;color:#6C4DF6"
+  onclick="scrollToId('materials')">
+
+  📍 Materials
+
+  </button>
+
+  </div>
+
+  </div>
+
+  `;
+
+
+  document
+    .getElementById("productGrid")
+    .appendChild(card);
+
+
+  document.getElementById(
+    "productCount"
+  ).textContent=
+    document.querySelectorAll(
+      ".product-card"
+    ).length+" Products";
+
+
+  closeModal("productModal");
+
+
+  resetProductForm();
+
+
+  toast("✓ Product added successfully");
+
+}
+
+
+function resetProductForm(){
+
+  document.getElementById(
+    "newProductName"
+  ).value="";
+
+
+  document.getElementById(
+    "newProductDescription"
+  ).value="";
+
+
+  document.getElementById(
+    "newProductPrice"
+  ).value="";
+
+
+  document.getElementById(
+    "newProductCost"
+  ).value="";
+
+
+  document.getElementById(
+    "newProductStock"
+  ).value="";
+
+
+  document.getElementById(
+    "newProductImage"
+  ).value="";
+
+
+  document.getElementById(
+    "imagePreview"
+  ).innerHTML="";
+
+
+  uploadedImage=null;
+
+}
+
+
+/* =========================================================
+   SALES
+========================================================= */
+
+function openSaleModal(
+  productId,
+  productName="Custom Hand-Painted Tote Bag",
+  price=599
+){
+
+  currentSaleProduct={
+    id:productId,
+    name:productName,
+    price:price
+  };
+
+
+  document.getElementById(
+    "saleProduct"
+  ).value=productName;
+
+
+  document.getElementById(
+    "salePrice"
+  ).value=price;
+
+
+  document.getElementById(
+    "saleQuantity"
+  ).value=1;
+
+
+  document
+    .getElementById("saleModal")
+    .classList.add("show");
+
+}
+
+
+function recordSale(){
+
+  if(!currentSaleProduct){
+
+    toast("Please select a product.");
+
+    return;
+
+  }
+
+
+  const quantity=
+    Number(
+      document.getElementById(
+        "saleQuantity"
+      ).value
+    );
+
+
+  const price=
+    Number(
+      document.getElementById(
+        "salePrice"
+      ).value
+    );
+
+
+  if(quantity<=0 || price<=0){
+
+    toast(
+      "Enter a valid quantity and price."
+    );
+
+    return;
+
+  }
+
+
+  const sale={
+
+    id:Date.now(),
+
+    productId:
+      currentSaleProduct.id,
+
+    product:
+      currentSaleProduct.name,
+
+    quantity:quantity,
+
+    price:price,
+
+    revenue:
+      quantity*price,
+
+    date:
+      new Date().toISOString()
+
+  };
+
+
+  sales.push(sale);
+
+
+  localStorage.setItem(
+    "skill2sell_sales",
+    JSON.stringify(sales)
+  );
+
+
+  closeModal("saleModal");
+
+
+  toast(
+    `✓ Sale recorded: ${quantity} × ${currentSaleProduct.name}`
+  );
+
+
+  updateSalesAnalytics();
+
+}
+
+
+/* =========================================================
+   SALES DATE HELPERS
+========================================================= */
+
+function startOfToday(){
+
+  const d=new Date();
+
+  d.setHours(0,0,0,0);
+
+  return d;
+
+}
+
+
+function startOfWeek(){
+
+  const d=new Date();
+
+  const day=d.getDay();
+
+  const diff=
+    day===0
+      ? 6
+      : day-1;
+
+  d.setDate(
+    d.getDate()-diff
+  );
+
+  d.setHours(0,0,0,0);
+
+  return d;
+
+}
+
+
+function getTodaySales(){
+
+  const start=
+    startOfToday()
+      .getTime();
+
+
+  return sales.filter(
+    sale=>
+      new Date(sale.date).getTime()
+      >=start
+  );
+
+}
+
+
+function getWeekSales(){
+
+  const start=
+    startOfWeek()
+      .getTime();
+
+
+  return sales.filter(
+    sale=>
+      new Date(sale.date).getTime()
+      >=start
+  );
+
+}
+
+
+/* =========================================================
+   UPDATE SALES ANALYTICS
+========================================================= */
+
+function updateSalesAnalytics(){
+
+  const today=
+    getTodaySales();
+
+
+  const week=
+    getWeekSales();
+
+
+  const todayUnits=
+    today.reduce(
+      (sum,sale)=>
+        sum+sale.quantity,
+      0
+    );
+
+
+  const todayRevenue=
+    today.reduce(
+      (sum,sale)=>
+        sum+sale.revenue,
+      0
+    );
+
+
+  const weekUnits=
+    week.reduce(
+      (sum,sale)=>
+        sum+sale.quantity,
+      0
+    );
+
+
+  const weekRevenue=
+    week.reduce(
+      (sum,sale)=>
+        sum+sale.revenue,
+      0
+    );
+
+
+  setText(
+    "todayUnits",
+    todayUnits
+  );
+
+
+  setText(
+    "todayRevenue",
+    formatCurrency(todayRevenue)
+  );
+
+
+  setText(
+    "weekUnits",
+    weekUnits
+  );
+
+
+  setText(
+    "weekRevenue",
+    formatCurrency(weekRevenue)
+  );
+
+
+  setText(
+    "dashTodayRevenue",
+    formatCurrency(todayRevenue)
+  );
+
+
+  setText(
+    "dashTodayOrders",
+    todayUnits
+  );
+
+
+  setText(
+    "dashWeekOrders",
+    weekUnits
+  );
+
+
+  setText(
+    "dashWeekRevenue",
+    formatCurrency(weekRevenue)
+  );
+
+
+  /*
+    Average daily sales for the current week.
+    We divide by the number of days elapsed,
+    rather than always dividing by 7.
+  */
+
+  const weekStart=
+    startOfWeek();
+
+
+  const todayStart=
+    startOfToday();
+
+
+  const elapsedDays=
+    Math.max(
+      1,
+      Math.floor(
+        (
+          todayStart.getTime()
+          -
+          weekStart.getTime()
+        )
+        /
+        86400000
+      )+1
+    );
+
+
+  const average=
+    weekUnits/
+    elapsedDays;
+
+
+  setText(
+    "avgDailySales",
+    average.toFixed(1)
+  );
+
+
+  /*
+    Weekly selling rate.
+    This demo uses 37 units of available
+    demo stock as the baseline.
+  */
+
+  const availableStock=
+    calculateAvailableStock();
+
+
+  let rate=
+    availableStock>0
+      ? (weekUnits/availableStock)*100
+      : 0;
+
+
+  rate=
+    Math.min(100,rate);
+
+
+  setText(
+    "weeklyRateText",
+    rate.toFixed(1)+"%"
+  );
+
+
+  document.getElementById(
+    "weeklyRateBar"
+  ).style.width=
+    rate+"%";
+
+
+  setText(
+    "dashboardRate",
+    rate.toFixed(1)+"%"
+  );
+
+
+  updateBestProduct(week);
+
+
+  updateProjectedSales(
+    average
+  );
+
+
+  updateSalesTable();
+
+
+  updateProductSales();
+
+
+  updateSalesChart();
+
+
+  updateBusinessRecommendation(
+    weekUnits,
+    rate
+  );
+
+}
+
+
+function calculateAvailableStock(){
+
+  /*
+    Demo stock:
+    Tote = 12
+    Pouch = 18
+    Bundle = 7
+
+    In a real backend this should come
+    from the seller's inventory database.
+  */
+
+  return 12+18+7;
+
+}
+
+
+/* =========================================================
+   BEST SELLING PRODUCT
+========================================================= */
+
+function updateBestProduct(week){
+
+  const map={};
+
+
+  week.forEach(sale=>{
+
+    if(!map[sale.product]){
+      map[sale.product]=0;
+    }
+
+    map[sale.product]+=sale.quantity;
+
+  });
+
+
+  const entries=
+    Object.entries(map)
+      .sort((a,b)=>b[1]-a[1]);
+
+
+  setText(
+    "bestProduct",
+    entries.length
+      ? entries[0][0]
+      : "—"
+  );
+
+}
+
+
+/* =========================================================
+   PROJECTED SALES
+========================================================= */
+
+function updateProjectedSales(avg){
+
+  const projection=
+    Math.round(avg*7);
+
+  setText(
+    "projectedSales",
+    projection
+  );
+
+}
+
+
+/* =========================================================
+   PRODUCT SALES
+========================================================= */
+
+function updateProductSales(){
+
+  const today=
+    getTodaySales();
+
+
+  const week=
+    getWeekSales();
+
+
+  const products=
+    document.querySelectorAll(
+      ".product-card"
+    );
+
+
+  products.forEach(card=>{
+
+    const id=
+      card.dataset.product;
+
+
+    if(!id)return;
+
+
+    /*
+      For the original products we use their IDs.
+    */
+
+    const todayElement=
+      document.getElementById(
+        "today-"+id
+      );
+
+
+    const weekElement=
+      document.getElementById(
+        "week-"+id
+      );
+
+
+    if(!todayElement || !weekElement){
+      return;
+    }
+
+
+    const productToday=
+      today
+        .filter(s=>s.productId===id)
+        .reduce(
+          (sum,s)=>sum+s.quantity,
+          0
+        );
+
+
+    const productWeek=
+      week
+        .filter(s=>s.productId===id)
+        .reduce(
+          (sum,s)=>sum+s.quantity,
+          0
+        );
+
+
+    todayElement.textContent=
+      productToday;
+
+
+    weekElement.textContent=
+      productWeek;
+
+  });
+
+}
+
+
+/* =========================================================
+   SALES TABLE
+========================================================= */
+
+function updateSalesTable(){
+
+  const body=
+    document.getElementById(
+      "salesTableBody"
+    );
+
+
+  if(sales.length===0){
+
+    body.innerHTML=`
+
+      <tr>
+
+      <td
+      colspan="4"
+      style="color:#777">
+
+      No sales recorded yet.
+
+      </td>
+
+      </tr>
+
+    `;
+
+    return;
+
+  }
+
+
+  const recent=
+    [...sales]
+      .sort(
+        (a,b)=>
+          new Date(b.date)
+          -
+          new Date(a.date)
+      )
+      .slice(0,15);
+
+
+  body.innerHTML=
+    recent.map(sale=>`
+
+      <tr>
+
+      <td>
+      ${formatDate(sale.date)}
+      </td>
+
+      <td>
+      ${escapeHTML(sale.product)}
+      </td>
+
+      <td>
+      ${sale.quantity}
+      </td>
+
+      <td>
+      ${formatCurrency(sale.revenue)}
+      </td>
+
+      </tr>
+
+    `).join("");
+
+}
+
+
+/* =========================================================
+   SALES CHART
+========================================================= */
+
+function updateSalesChart(){
+
+  const chart=
+    document.getElementById(
+      "salesChart"
+    );
+
+
+  const days=[];
+
+
+  for(let i=6;i>=0;i--){
+
+    const d=new Date();
+
+    d.setHours(0,0,0,0);
+
+    d.setDate(
+      d.getDate()-i
+    );
+
+    days.push(d);
+
+  }
+
+
+  const values=
+    days.map(day=>{
+
+      return sales
+        .filter(sale=>{
+
+          const date=
+            new Date(sale.date);
+
+          return (
+            date.getFullYear()
+            ===
+            day.getFullYear()
+          &&
+            date.getMonth()
+            ===
+            day.getMonth()
+          &&
+            date.getDate()
+            ===
+            day.getDate()
+          );
+
+        })
+        .reduce(
+          (sum,sale)=>
+            sum+sale.quantity,
+          0
+        );
+
+    });
+
+
+  const max=
+    Math.max(
+      1,
+      ...values
+    );
+
+
+  chart.innerHTML=
+    values.map(value=>{
+
+      const height=
+        value===0
+          ? 8
+          : Math.max(
+              15,
+              (value/max)*100
+            );
+
+
+      return `
+      <div
+      class="bar"
+      title="${value} units"
+      style="height:${height}%">
+      </div>
+      `;
+
+    }).join("");
+
+}
+
+
+/* =========================================================
+   BUSINESS RECOMMENDATION
+========================================================= */
+
+function updateBusinessRecommendation(
+  units,
+  rate
+){
+
+  const el=
+    document.getElementById(
+      "dashboardRecommendation"
+    );
+
+
+  if(units===0){
+
+    el.textContent=
+      "You have not recorded any sales this week yet. Record your first order to start measuring your selling rate.";
+
+    return;
+
+  }
+
+
+  if(rate>=70){
+
+    el.textContent=
+      "🔥 Excellent selling speed. Your inventory is moving quickly. Consider producing more of your best-selling product.";
+
+    return;
+
+  }
+
+
+  if(rate>=30){
+
+    el.textContent=
+      "📈 Your products are getting traction. Keep promoting your best seller and test new content.";
+
+    return;
+
+  }
+
+
+  el.textContent=
+    "💡 Sales are still developing. Try a promotional offer, improve your product photos and collect more customer feedback.";
+
+}
+
+
+/* =========================================================
+   FEEDBACK
+========================================================= */
+
+function viewFeedback(){
+
+  document
+    .getElementById("feedbackModal")
+    .classList.add("show");
+
+}
+
+
+/* =========================================================
+   PIVOT
+========================================================= */
+
+function openPivot(){
+
+  scrollToId("pivot");
+
+  toast(
+    "✨ AI is analyzing customer feedback"
+  );
+
+}
+
+
+function approvePivot(){
+
+  toast(
+    "✓ Recommendation approved by seller"
+  );
+
+}
+
+
+/* =========================================================
+   SALES ASSISTANT
+========================================================= */
+
+function generateReply(type){
+
+  const reply=
+    document.getElementById(
+      "aiReply"
+    );
+
+
+  const replies={
+
+    discount:
+      "We currently have a special bundle offer available. 😊 I can also suggest a lower-cost option if you have a specific budget.",
+
+    product:
+      "Based on your interest, I'd recommend our Custom Tote Bag at ₹399. You can personalize the artwork and colors.",
+
+    quote:
+      "Sure! I can prepare a quotation. Custom Tote Bag — ₹399 + delivery. Personalization is included.",
+
+    order:
+      "Perfect! 🎉 Your order can be confirmed. I'll need your preferred design, name and delivery details."
+
+  };
+
+
+  reply.textContent=
+    replies[type];
+
+
+  toast(
+    "✨ AI generated a response"
+  );
+
+}
+
+
+/* =========================================================
+   CONTENT
+========================================================= */
+
+const contentData={
+
+  caption:
+`Made by hand. Made for you. 🎨
+
+Turn everyday moments into something personal with our custom-painted tote bags.`,
+
+  reel:
+`Reel idea:
+
+Start with a blank tote → show the painting process → reveal the finished design → show the customer using it.`,
+
+  story:
+`Story 1: Want a personalized tote? 🎨
+
+Story 2: Choose your design.
+
+Story 3: We paint it for you.`,
+
+  hashtags:
+`#FabricPainting #HandmadeIndia #CustomGifts #SmallBusiness #InstagramShop`
+
+};
+
+
+function changeContent(type,button){
+
+  document
+    .querySelectorAll(".tabs .tab")
+    .forEach(b=>{
+      if(
+        b.parentElement===
+        button.parentElement
+      ){
+        b.classList.remove("active");
+      }
+    });
+
+
+  button.classList.add("active");
+
+
+  document.getElementById(
+    "contentOutput"
+  ).innerText=
+    contentData[type];
+
+}
+
+
+function regenerateContent(){
+
+  document.getElementById(
+    "contentOutput"
+  ).innerText=
+
+`✨ AI regenerated your content:
+
+Your style. Your story. Your tote. 🎨
+
+Made by hand and personalized just for you.`;
+
+  toast(
+    "✨ Content regenerated"
+  );
+
+}
+
+
+function copyContent(){
+
+  const text=
+    document.getElementById(
+      "contentOutput"
+    ).innerText;
+
+
+  navigator.clipboard?.writeText(text);
+
+
+  toast("✓ Content copied");
+
+}
+
+
+/* =========================================================
+   DASHBOARD
+========================================================= */
+
+function dashNav(el){
+
+  document
+    .querySelectorAll(".side-link")
+    .forEach(x=>
+      x.classList.remove("active")
+    );
+
+
+  el.classList.add("active");
+
+
+  toast(
+    "Dashboard: "+el.textContent
+  );
+
+}
+
+
+/* =========================================================
+   LIVE DEMO
+========================================================= */
+
+function runDemo(){
+
+  scrollToId("builder");
+
+
+  document.getElementById(
+    "skillInput"
+  ).value=
+    "Fabric Painting";
+
+
+  document.getElementById(
+    "budgetInput"
+  ).value=
+    "2000";
+
+
+  toast(
+    "🎬 Live Demo Started"
+  );
+
+
+  setTimeout(()=>{
+    generateBusiness();
+  },800);
+
+
+  setTimeout(()=>{
+    scrollToId("materials");
+
+    document
+      .querySelector(
+        '.material-option input[value="fabric"]'
+      )
+      .checked=true;
+
+    document
+      .querySelector(
+        '.material-option input[value="paint"]'
+      )
+      .checked=true;
+
+    document
+      .querySelector(
+        '.material-option input[value="brushes"]'
+      )
+      .checked=true;
+
+    findMaterials();
+
+  },1800);
+
+
+  setTimeout(()=>{
+    scrollToId("products");
+  },3200);
+
+
+  setTimeout(()=>{
+    scrollToId("sales");
+  },4300);
+
+}
+
+
+/* =========================================================
+   UTILITY FUNCTIONS
+========================================================= */
+
+function setText(id,value){
+
+  const element=
+    document.getElementById(id);
+
+  if(element){
+    element.textContent=value;
+  }
+
+}
+
+
+function formatCurrency(value){
+
+  return "₹"+
+    Number(value || 0)
+      .toLocaleString("en-IN");
+
+}
+
+
+function formatDate(date){
+
+  return new Date(date)
+    .toLocaleDateString(
+      "en-IN",
+      {
+        day:"2-digit",
+        month:"short",
+        year:"numeric"
+      }
+    );
+
+}
+
+
+function escapeHTML(str){
+
+  return String(str)
+    .replace(
+      /[&<>"']/g,
+      function(m){
+
+        return {
+
+          "&":"&amp;",
+          "<":"&lt;",
+          ">":"&gt;",
+          '"':"&quot;",
+          "'":"&#039;"
+
+        }[m];
+
+      }
+    );
+
+}
+
+
+function escapeAttribute(str){
+
+  return String(str)
+    .replace(/'/g,"\\'")
+    .replace(/"/g,"&quot;");
+
+}
+
+
+/* =========================================================
+   INITIALIZE
+========================================================= */
+
+document.addEventListener(
+  "DOMContentLoaded",
+  function(){
+
+    updateSalesAnalytics();
+    refreshAuthButton();
+
+  }
+);
+
+</script>
+
+</body>
+</html>
